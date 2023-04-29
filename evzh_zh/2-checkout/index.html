@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2. feladat: Pénztár</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <h1>2. feladat: Pénztár</h1>
+    <h2>Szerkesztő</h2>
+    Termék: <select></select> <br>
+    Mennyiség: <input type="number" id="amount" value="1" step="1" min="1" max="99"><br>
+    <button id="add">Hozzáad</button>
+    <button id="storno">Sztornó</button>
+    <h2>Nyugta</h2>
+    <input type="checkbox" id="vat">ÁFA mutatása<br>
+    <table>
+        <thead>
+            <tr>
+                <th>Kód</th>
+                <th>Terméknév</th>
+                <th>Mennyiség</th>
+                <th>Egységár</th>
+                <th id='vatTh' hidden>ÁFA</th>
+                <th>Fizetendő</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    Összesen fizetendő: <b id="total">0</b> Ft
+    <script src="product-data.js"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>

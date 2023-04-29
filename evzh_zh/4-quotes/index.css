@@ -1,0 +1,59 @@
+@import url("https://cdn.jsdelivr.net/gh/elte-fi/www-assets@19.10.16/styles/mdss.min.css");
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #333333;
+  color: #dddddd;
+}
+div {
+  /* border: 2px solid gray; */
+}
+header {
+  margin: 0;
+}
+#main {
+  display: flex;
+  flex-direction: row;
+  flex: 1 1 auto;
+}
+#left {
+  flex: 1 1 40%;
+  display: flex;
+  flex-direction: column;
+}
+#list {
+  flex: 1 1 auto;
+}
+#list div {
+  background-color: white;
+  color: black;
+  border-radius: 3px;
+  margin: 5px;
+  padding: 5px;
+}
+#list div.selected {
+  border: 3px solid orange;
+}
+#viewer {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 60%;
+}
+#viewer > * {
+  margin: 5px;;
+}
+#quote {
+  flex: 1 1 auto;
+  background-color: white;
+  border-radius: 3px;
+  color: black;
+  padding: 5px;
+  overflow: auto;
+  display: flex;
+}
+#quote * {
+  flex: 1 1 auto;
+  border: none;
+}
