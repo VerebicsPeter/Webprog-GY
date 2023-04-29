@@ -4,6 +4,8 @@ const gameDiv = document.querySelector("#game")
 const restartDiv = document.querySelector("#restart")
 const playerOneInfo = document.querySelector("#playerOneInfo")
 const playerTwoInfo = document.querySelector("#playerTwoInfo")
+playerOneInfo.addEventListener("dragstart", onDragStart)
+playerTwoInfo.addEventListener("dragstart", onDragStart)
 
 // name and start button selectors //
 const name1Text = document.querySelector("#name1")
@@ -16,6 +18,10 @@ restartBtn.addEventListener("click", onRestartClick)
 // game table selector and event listeners //
 const table = document.querySelector("tbody")
 table.addEventListener("click", onTileClick)
+table.addEventListener("dragover", onTileDragOver)
+table.addEventListener("drop", onTileDrop)
+let dragged = '' // dragged images name
+
 // elements for string outputs //
 const output = document.querySelector("#output")
 const winner = document.querySelector("#winner")
@@ -55,13 +61,13 @@ function tryReadInput()
 function onStartClick()
 {
     if (!tryReadInput()) return
-    meow(); startGame()
+    meow(0); startGame()
 }
 
 // restart game event handler //
 function onRestartClick()
 {
-    meow(); startGame()
+    meow(0); startGame()
 }
 
 // click tile event handler //
@@ -76,9 +82,40 @@ function onTileClick(e)
         
         // only place if player has cats
         if (gameState.current.cats > 0) {
-            // replace with function //
             let cell = gameState.board[row][col]
             // only place if cell is empty
+            if (cell === 0) {turn(row, col, td)}
+        }
+        updateInfoViews()
+        console.log(`(${row},${col}) = ${gameState.board[row][col]}`)
+    }
+}
+
+// drag player cat image event handler //
+function onDragStart(e) {
+    let pathStr = e.target.src.split('/')
+    let pngName = pathStr[pathStr.length - 1]
+    console.log(pngName)
+    if (pngName === "cat1.png" && gameState.current.value !== 1) return
+    if (pngName === "cat2.png" && gameState.current.value !== 2) return
+    dragged = pngName
+}
+// dragover event handler for tile //
+function onTileDragOver(e) { e.preventDefault() }
+// drop envent handler for tile //
+function onTileDrop(e) {
+    if (gameState.state !== "none") return
+    if (dragged === '' || (dragged !== 'cat1.png' && dragged !== 'cat2.png')) return
+    if (dragged === "cat1.png" && gameState.current.value !== 1) return
+    if (dragged === "cat2.png" && gameState.current.value !== 2) return
+    if (e.target.matches("td"))
+    {
+        const row = e.target.closest("tr").rowIndex
+        const col = e.target.closest("td").cellIndex
+        const td  = e.target.closest("td")
+        
+        if (gameState.current.cats > 0) {
+            let cell = gameState.board[row][col]
             if (cell === 0) {turn(row, col, td)}
         }
         updateInfoViews()
@@ -201,7 +238,7 @@ function matchingNeighbours(row, col, board) {
 }
 
 function turn(row, col, td) {
-    td.innerHTML = getPictureResourece(gameState.current.value); meow()
+    td.innerHTML = getPictureResourece(gameState.current.value); meow(gameState.current.value)
     // place cat
     gameState.board[row][col] = gameState.current.value
     gameState.current.cats--;
@@ -299,6 +336,7 @@ function getPictureResourece(num) {
     return ""
 }
 
-function meow() {
-    let audio = new Audio('./assets/meow.mp3'); audio.play(); 
+function meow(num) {
+    if (num !== 0 && num !== 1 && num !== 2) return
+    let audio = new Audio(`./assets/meow${num}.mp3`); audio.play(); 
 }
