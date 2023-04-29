@@ -1,6 +1,7 @@
 // div selectors //
 const menuDiv = document.querySelector("#menu")
 const gameDiv = document.querySelector("#game")
+const restartDiv = document.querySelector("#restart")
 const playerOneInfo = document.querySelector("#playerOneInfo")
 const playerTwoInfo = document.querySelector("#playerTwoInfo")
 
@@ -8,27 +9,33 @@ const playerTwoInfo = document.querySelector("#playerTwoInfo")
 const name1Text = document.querySelector("#name1")
 const name2Text = document.querySelector("#name2")
 const startBtn = document.querySelector("#start")
+const restartBtn = restartDiv.querySelector("button")
 startBtn.addEventListener("click", onStartClick)
+restartBtn.addEventListener("click", onRestartClick)
 
 // game table selector and event listeners //
 const table = document.querySelector("tbody")
 table.addEventListener("click", onTileClick)
+// elements for string outputs //
 const output = document.querySelector("#output")
+const winner = document.querySelector("#winner")
 
 // game size //
-const gameSize = 6
+const gameSize = document.querySelector("#size")
+// number of cats //
+const gameCats = document.querySelector("#cats")
 // game point (needed for winning) //
-let gamePoints = document.querySelector('#points').value
+const gamePoints = document.querySelector("#points")
 
 // game state object //
 let gameState= {
     player1 : {
         name : '', value : 1,
-        cats : 8, points : 0
+        cats : gameCats.value, points : 0
     },
     player2 : {
         name : '', value : 2,
-        cats : 8, points : 0
+        cats : gameCats.value, points : 0
     },
     current : {},
     board : [],
@@ -37,7 +44,7 @@ let gameState= {
 
 function tryReadInput()
 {
-    if (name1Text === "" || name2Text === "") return false
+    if (name1Text.value === "" || name2Text.value === "") return false
 
     name1 = name1Text.value
     name2 = name2Text.value
@@ -51,10 +58,18 @@ function onStartClick()
     meow(); startGame()
 }
 
+// restart game event handler //
+function onRestartClick()
+{
+    meow(); startGame()
+}
+
 // click tile event handler //
 function onTileClick(e)
 {
-    if (e.target.matches("td")) {
+    if (gameState.state !== "none") return
+    if (e.target.matches("td"))
+    {
         const row = e.target.closest("tr").rowIndex
         const col = e.target.closest("td").cellIndex
         const td = e.target.closest("td")
@@ -80,22 +95,22 @@ function startGame() {
     playerTwoInfo.querySelector('h3').innerHTML = `${name2}`
     updateInfoViews()
 
-    menuDiv.hidden = true
+    menuDiv.hidden = true; restartDiv.hidden = true
     gameDiv.hidden = false
     playerOneInfo.hidden = false
     playerTwoInfo.hidden = false
 
     table.innerHTML = ""
-    for (let i = 0; i < gameSize; i++) {
+    for (let i = 0; i < gameSize.value; i++) {
         const row = table.insertRow()
-        for (let j = 0; j < gameSize; j++) {
+        for (let j = 0; j < gameSize.value; j++) {
             row.insertCell();
         }
     }
     
-    for (let i = 0; i < gameSize; i++) {
+    for (let i = 0; i < gameSize.value; i++) {
         rowData = []
-        for (let j = 0; j < gameSize; j++) {
+        for (let j = 0; j < gameSize.value; j++) {
             rowData.push(0)
         }
         gameState.board.push(rowData);
@@ -107,8 +122,8 @@ function startGame() {
 // resets game's state
 function resetGameState() {
     gameState.board = []
-    gameState.player1.cats = 8; gameState.player1.points = 0
-    gameState.player2.cats = 8; gameState.player2.points = 0
+    gameState.player1.cats = gameCats.value; gameState.player1.points = 0
+    gameState.player2.cats = gameCats.value; gameState.player2.points = 0
     gameState.current = gameState.player1
     gameState.state = "none" // only changes on final states
 }
@@ -122,16 +137,16 @@ function updateGameState() {
         return true
     }
     if (gameState.player1.cats === 0) {
-        gameState.state = `${gameState.player1.name} nyert.`
+        gameState.state = `${gameState.player1.name} vesztett.`
         return true
     }
     if (gameState.player2.cats === 0) {
-        gameState.state = `${gameState.player2.name} nyert.`
+        gameState.state = `${gameState.player2.name} vesztett.`
         return true
     }
 
-    for (let i = 0; i < gameSize; i++) {
-        for (let j = 0; j < gameSize; j++) {
+    for (let i = 0; i < gameSize.value; i++) {
+        for (let j = 0; j < gameSize.value; j++) {
             let r = matchingNeighbours(i, j, board)
             if (r.length > 0)
             {
@@ -151,13 +166,12 @@ function updateGameState() {
             }
         }
     }
-    
     // check if game is won
-    if (gameState.player1.points >= gamePoints) {
+    if (gameState.player1.points >= gamePoints.value) {
         gameState.state = `${gameState.player1.name} nyert.`
         return true
     }
-    if (gameState.player2.points >= gamePoints) {
+    if (gameState.player2.points >= gamePoints.value) {
         gameState.state = `${gameState.player2.name} nyert.`
         return true
     }
@@ -169,12 +183,12 @@ function matchingNeighbours(row, col, board) {
     
     let res = []
     let h = false, v = false, ld = false, rd = false
-    if (-1 < col - 1 && col + 1 < gameSize) h = board[row][col - 1] === board[row][col] && board[row][col + 1] === board[row][col] // horizontal
-    if (-1 < row - 1 && row + 1 < gameSize) v = board[row - 1][col] === board[row][col] && board[row + 1][col] === board[row][col] // vertical
-    if (-1 < col - 1 && col + 1 < gameSize && -1 < row - 1 && row + 1 < gameSize) {
+    if (-1 < col - 1 && col + 1 < gameSize.value) h = board[row][col - 1] === board[row][col] && board[row][col + 1] === board[row][col] // horizontal
+    if (-1 < row - 1 && row + 1 < gameSize.value) v = board[row - 1][col] === board[row][col] && board[row + 1][col] === board[row][col] // vertical
+    if (-1 < col - 1 && col + 1 < gameSize.value && -1 < row - 1 && row + 1 < gameSize.value) {
         ld = board[row - 1][col - 1] === board[row][col] && board[row + 1][col + 1] === board[row][col] // left-diagonal
     }
-    if (-1 < col - 1 && col + 1 < gameSize && -1 < row - 1 && row + 1 < gameSize) {
+    if (-1 < col - 1 && col + 1 < gameSize.value && -1 < row - 1 && row + 1 < gameSize.value) {
         rd = board[row + 1][col - 1] === board[row][col] && board[row - 1][col + 1] === board[row][col] // right-diagonal
     }
 
@@ -196,7 +210,8 @@ function turn(row, col, td) {
     // update view
     updateBoardView()
     if (updateGameState()) {
-        alert(gameState.state); startGame()
+        restartDiv.hidden = false
+        winner.innerHTML = `${gameState.state}`
     } else {
         switchPlayer()
     }
@@ -208,7 +223,7 @@ function boopBoard(row, col) {
     for (let i = row - 1; i <= row + 1; i++) {
         for (let j = col - 1; j <= col + 1; j++) {
             if (i === row && j === col) continue
-            if (i < 0 || j < 0 || i >= gameSize || j >= gameSize) continue
+            if (i < 0 || j < 0 || i >= gameSize.value || j >= gameSize.value) continue
 
             if (gameState.board[i][j] !== 0) // check if neighbour is player
             {
@@ -226,7 +241,7 @@ function boopField(x, y, x0, y0) {
     let row = x + dx
     let col = y + dy
 
-    if (row < 0 || row >= gameSize || col < 0 || col >= gameSize) { // if booped off board
+    if (row < 0 || row >= gameSize.value || col < 0 || col >= gameSize.value) { // if booped off board
         if (gameState.board[x][y] === 1) gameState.player1.cats++
         if (gameState.board[x][y] === 2) gameState.player2.cats++
         gameState.board[x][y] = 0

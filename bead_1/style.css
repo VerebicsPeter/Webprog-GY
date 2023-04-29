@@ -12,18 +12,26 @@ table, td {
     text-align: center;
     font-weight: 600;
     font-size: 25px;
-
 }
 
-#game, #menu {
+#game, #menu, #restart {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    
-    border-radius: 10px;
     padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #ffffff;
     background-color: #5d74ce;
+}
+
+#restart {
+    width: 200px;
+}
+
+#restart > button {
+    width: 60px;
+    margin-left: 70px;
 }
 
 #playerOneInfo {
@@ -31,8 +39,9 @@ table, td {
     top: 50%; left: 10%;
     transform: translate(-50%, -50%);
     min-height: 550px; width: 100px;
-    border-radius: 10px;
     padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #ffffff;
     background-color: #5d74ce;
 }
 
@@ -41,8 +50,9 @@ table, td {
     top: 50%; left: 90%;
     transform: translate(-50%, -50%);
     min-height: 550px; width: 100px;
-    border-radius: 10px;
     padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #ffffff;
     background-color: #5d74ce;
 }
 

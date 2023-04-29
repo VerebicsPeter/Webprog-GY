@@ -30,7 +30,7 @@ A listában tegyél `[X]` jelet minden olyan feladat elé, amelyet legalább ré
 [ ] Játéktér: a cicák elhelyezése kattintás mellett a kispadon található cicák húzásával (drag and drop) is elvégezhető (2 pont)
 [ ] Játéktér: a cicák ellökődése animációval történik (1 pont)
 [x] Kezdőképernyő: a játék indítása előtt megadható a két játékos neve és a győzelemhez szükséges pontszám (1 pont)
-[.] Kezdőképernyő: beállítható a játéktér nagysága (pl. 7x7) és a játékosonkénti cicák száma (1 pont)
+[x] Kezdőképernyő: beállítható a játéktér nagysága (pl. 7x7) és a játékosonkénti cicák száma (1 pont)
 [ ] Kezdőképernyő: megjelennek a legutóbbi játékok eredményei — kik játszottak, mikor és milyen végeredménnyel (1 pont)
 [ ] Kezdőképernyő: a legutóbbi játékok eredményei megmaradnak az oldal bezárása után is (1 pont)
 [x] Játéktér: a játék végén egyetlen gombnyomással új játék indítható ugyanezekkel a beállításokkal az oldal újratöltése nélkül (1 pont)
