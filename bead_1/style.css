@@ -26,10 +26,9 @@ table, td {
 }
 
 #stat {
+    height: auto; width: 25%;
     position: absolute;
-    top: 50%;
-    left: 75%;
-    transform: translate(-50%, -50%);
+    left: 20px; top: 20px;
     padding: 20px;
     border-radius: 10px;
     border: 2px solid #A4D0A4;

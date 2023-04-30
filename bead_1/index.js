@@ -38,7 +38,8 @@ const gamePoints = document.querySelector("#points")
 
 // gameStats array (holds past games' stats) //
 let gameStats = JSON.parse(getCookie("gameStats"))
-updateStatDiv()
+if (gameStats === null) gameStats = []
+else updateStatDiv()
 
 // game state object //
 let gameState = {
@@ -256,9 +257,10 @@ function turn(row, col, td) {
     updateBoardView()
     if (updateGameState()) {
         let stats = {
-            players: `${gameState.player1.name} vs. ${gameState.player2.name}`, outcome: `${gameState.state}`,
+            players: `${gameState.player1.name} vs. ${gameState.player2.name}`, outcome: `${gameState.state} <br/>`,
             date: new Date().toLocaleDateString()
         }
+        if (gameStats === null) {gameSats = []}
         gameStats.push(stats); updateStatDiv()
         setCookie("gameStats", JSON.stringify(gameStats), 1);
         winner.innerHTML = `${gameState.state}`
