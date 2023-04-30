@@ -1,12 +1,12 @@
 body {
     font-family: Verdana, Arial, sans-serif;
-    background-color: #312855;
-    color: #ffffff;
+    background-color: #F7E1AE;
+    color: #FFF8D6;
 }
 
 table, td {
-    background-color: #5d74ce;
-    border: 2px solid #ffffff;
+    background-color: #68845b;
+    border: 2px solid #FFF8D6;
     border-collapse: collapse;
     min-width: 60px; height: 60px;
     text-align: center;
@@ -21,8 +21,8 @@ table, td {
     transform: translate(-50%, -50%);
     padding: 20px;
     border-radius: 10px;
-    border: 2px solid #ffffff;
-    background-color: #5d74ce;
+    border: 2px solid #A4D0A4;
+    background-color: #68845b;
 }
 
 #stat {
@@ -32,8 +32,8 @@ table, td {
     transform: translate(-50%, -50%);
     padding: 20px;
     border-radius: 10px;
-    border: 2px solid #ffffff;
-    background-color: #5d74ce;
+    border: 2px solid #A4D0A4;
+    background-color: #68845b;
 }
 
 #stat > div {
@@ -41,7 +41,7 @@ table, td {
 }
 
 hr {
-    border: 1px solid #ffffff;
+    border: 1px solid #A4D0A4;
 }
 
 #restart {
@@ -64,8 +64,8 @@ hr {
     min-height: 550px; width: 100px;
     padding: 20px;
     border-radius: 10px;
-    border: 2px solid #ffffff;
-    background-color: #5d74ce;
+    border: 2px solid #A4D0A4;
+    background-color: #68845b;
 }
 
 #playerTwoInfo {
@@ -75,8 +75,8 @@ hr {
     min-height: 550px; width: 100px;
     padding: 20px;
     border-radius: 10px;
-    border: 2px solid #ffffff;
-    background-color: #5d74ce;
+    border: 2px solid #A4D0A4;
+    background-color: #68845b;
 }
 
 #playerOneInfo > h3, #playerTwoInfo > p {
