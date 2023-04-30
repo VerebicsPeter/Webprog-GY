@@ -1,6 +1,7 @@
 // div selectors //
 const menuDiv = document.querySelector("#menu")
 const gameDiv = document.querySelector("#game")
+const statDiv = document.querySelector("#stat")
 const restartDiv = document.querySelector("#restart")
 const playerOneInfo = document.querySelector("#playerOneInfo")
 const playerTwoInfo = document.querySelector("#playerTwoInfo")
@@ -11,9 +12,11 @@ playerTwoInfo.addEventListener("dragstart", onDragStart)
 const name1Text = document.querySelector("#name1")
 const name2Text = document.querySelector("#name2")
 const startBtn = document.querySelector("#start")
-const restartBtn = restartDiv.querySelector("button")
+const restartBtn = document.querySelector("#restartBtn")
+const menuBtn = document.querySelector('#menuBtn')
 startBtn.addEventListener("click", onStartClick)
 restartBtn.addEventListener("click", onRestartClick)
+menuBtn.addEventListener('click', onMenuClick)
 
 // game table selector and event listeners //
 const table = document.querySelector("tbody")
@@ -33,8 +36,11 @@ const gameCats = document.querySelector("#cats")
 // game point (needed for winning) //
 const gamePoints = document.querySelector("#points")
 
+// gameStats array (holds past games' stats) //
+let gameStats = []
+
 // game state object //
-let gameState= {
+let gameState = {
     player1 : {
         name : '', value : 1,
         cats : gameCats.value, points : 0
@@ -68,6 +74,17 @@ function onStartClick()
 function onRestartClick()
 {
     meow(0); startGame()
+}
+// menu btn event handler //
+function onMenuClick()
+{
+    meow(0);
+    menuDiv.hidden = false
+    statDiv.hidden = false
+    restartDiv.hidden = true
+    gameDiv.hidden = true
+    playerOneInfo.hidden = true
+    playerTwoInfo.hidden = true
 }
 
 // click tile event handler //
@@ -104,23 +121,10 @@ function onDragStart(e) {
 function onTileDragOver(e) { e.preventDefault() }
 // drop envent handler for tile //
 function onTileDrop(e) {
-    if (gameState.state !== "none") return
     if (dragged === '' || (dragged !== 'cat1.png' && dragged !== 'cat2.png')) return
     if (dragged === "cat1.png" && gameState.current.value !== 1) return
     if (dragged === "cat2.png" && gameState.current.value !== 2) return
-    if (e.target.matches("td"))
-    {
-        const row = e.target.closest("tr").rowIndex
-        const col = e.target.closest("td").cellIndex
-        const td  = e.target.closest("td")
-        
-        if (gameState.current.cats > 0) {
-            let cell = gameState.board[row][col]
-            if (cell === 0) {turn(row, col, td)}
-        }
-        updateInfoViews()
-        console.log(`(${row},${col}) = ${gameState.board[row][col]}`)
-    }
+    onTileClick(e)
 }
 
 // start the game
@@ -131,8 +135,11 @@ function startGame() {
     playerOneInfo.querySelector('h3').innerHTML = `${name1}`
     playerTwoInfo.querySelector('h3').innerHTML = `${name2}`
     updateInfoViews()
-
-    menuDiv.hidden = true; restartDiv.hidden = true
+    // hide menus
+    menuDiv.hidden = true
+    statDiv.hidden = true
+    restartDiv.hidden = true
+    // unhide game divs
     gameDiv.hidden = false
     playerOneInfo.hidden = false
     playerTwoInfo.hidden = false
@@ -146,7 +153,7 @@ function startGame() {
     }
     
     for (let i = 0; i < gameSize.value; i++) {
-        rowData = []
+        let rowData = []
         for (let j = 0; j < gameSize.value; j++) {
             rowData.push(0)
         }
@@ -247,8 +254,13 @@ function turn(row, col, td) {
     // update view
     updateBoardView()
     if (updateGameState()) {
-        restartDiv.hidden = false
+        let stats = {
+            players: `${gameState.player1.name} vs. ${gameState.player2.name}`, outcome: `${gameState.state}`,
+            date: new Date().toLocaleDateString()
+        }
+        gameStats.push(stats); updateStatDiv()
         winner.innerHTML = `${gameState.state}`
+        restartDiv.hidden = false
     } else {
         switchPlayer()
     }
@@ -328,6 +340,15 @@ function updateInfoViews() {
     }
 
     output.innerHTML = `${gameState.current.name} következik`
+}
+
+function updateStatDiv() {
+    let innerDiv = statDiv.querySelector("div"); innerDiv.innerHTML = "";
+    gameStats.forEach(element => {
+        let div = document.createElement('div')
+        div.innerHTML = `${element.players}: ${element.outcome} (${element.date})<hr>`
+        innerDiv.appendChild(div)
+    });
 }
 
 function getPictureResourece(num) {

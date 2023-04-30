@@ -25,6 +25,25 @@ table, td {
     background-color: #5d74ce;
 }
 
+#stat {
+    position: absolute;
+    top: 50%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #ffffff;
+    background-color: #5d74ce;
+}
+
+#stat > div {
+    padding: 10px;
+}
+
+hr {
+    border: 1px solid #ffffff;
+}
+
 #restart {
     width: 200px;
 }
@@ -32,6 +51,10 @@ table, td {
 #restart > button {
     width: 60px;
     margin-left: 70px;
+}
+
+#menuBtn {
+    margin-bottom: 3px;
 }
 
 #playerOneInfo {
