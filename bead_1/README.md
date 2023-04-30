@@ -32,7 +32,7 @@ A listában tegyél `[X]` jelet minden olyan feladat elé, amelyet legalább ré
 [x] Kezdőképernyő: a játék indítása előtt megadható a két játékos neve és a győzelemhez szükséges pontszám (1 pont)
 [x] Kezdőképernyő: beállítható a játéktér nagysága (pl. 7x7) és a játékosonkénti cicák száma (1 pont)
 [x] Kezdőképernyő: megjelennek a legutóbbi játékok eredményei — kik játszottak, mikor és milyen végeredménnyel (1 pont)
-[ ] Kezdőképernyő: a legutóbbi játékok eredményei megmaradnak az oldal bezárása után is (1 pont)
+[x] Kezdőképernyő: a legutóbbi játékok eredményei megmaradnak az oldal bezárása után is (1 pont)
 [x] Játéktér: a játék végén egyetlen gombnyomással új játék indítható ugyanezekkel a beállításokkal az oldal újratöltése nélkül (1 pont)
 [x] Nyávogás: a tevékenységekhez (pl. játék indítása, cica elhelyezése, lökdösődés, pontszerzés) hangeffektusok is tartoznak (1 pont)
 [x] Egyéb: igényes kinézet és kódszervezés (1 pont)
