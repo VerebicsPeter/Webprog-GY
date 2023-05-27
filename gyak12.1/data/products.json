@@ -1,0 +1,42 @@
+{
+    "1": {
+        "name": "Lekvár",
+        "category": "Étel"
+    },
+    "2": {
+        "name": "Kenyér",
+        "category": "Étel"
+    },
+    "3": {
+        "name": "Ásványvíz",
+        "category": "Ital"
+    },
+    "4": {
+        "name": "Narancslé",
+        "category": "Ital"
+    },
+    "5": {
+        "name": "Tej",
+        "category": "Ital"
+    },
+    "6": {
+        "name": "Zöld Póló",
+        "category": "Ruha"
+    },
+    "7": {
+        "name": "Piros Póló",
+        "category": "Ruha"
+    },
+    "8": {
+        "name": "Zöld Pulcsi",
+        "category": "Ruha"
+    },
+    "9": {
+        "name": "Piros Pulcsi",
+        "category": "Ruha"
+    },
+    "10": {
+        "name": "Fehér AirForce",
+        "category": "Ruha"
+    }
+}
