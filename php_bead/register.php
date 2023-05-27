@@ -9,16 +9,15 @@ function is_empty($input, $key)
 }
 function validate($input, &$errors, $auth)
 {
-
     if (is_empty($input, "username")) {
-        $errors[] = "Felhasználónév megadása kötelező";
+        $errors[] = "No username entered!";
     }
     if (is_empty($input, "password")) {
-        $errors[] = "Jelszó megadása kötelező";
+        $errors[] = "No password entered!";
     }
     if (count($errors) == 0) {
         if ($auth->user_exists($input['username'])) {
-            $errors[] = "User already exists";
+            $errors[] = "Username already taken!";
         }
     }
 
@@ -37,12 +36,11 @@ if (count($_POST) != 0) {
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Listify - Registration</title>
 </head>
 
 <body>
@@ -55,13 +53,17 @@ if (count($_POST) != 0) {
     </ul>
     <?php }?>
     <form action="" method="post">
-        <label for="username">Username:</label><br>
+        <label for="username"><span style="color: red;">*</span>Username:</label><br>
         <input id="username" name="username" type="text"><br>
-        <label for="password">Password:</label><br>
+
+        <label for="password"><span style="color: red;">*</span>Password:</label><br>
         <input id="password" name="password" type="password"><br>
+
+        <label for="password">Email address:</label><br>
+        <input id="email" name="email" type="email"><br>
+
         <input style="margin: 10px 0px 10px 0px;" type="submit" value="Register">
     </form>
     <a href="login.php">Login</a>
 </body>
-
 </html>

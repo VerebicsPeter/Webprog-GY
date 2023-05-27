@@ -1,4 +1,6 @@
 <?php
+require_once "jsonstorage.php";
+
 class Playlist
 {
     public $_id = null;
