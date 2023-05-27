@@ -20,7 +20,7 @@ if (isset($_SESSION['user']))
     $is_admin = $auth->is_admin($_SESSION['user']); // admin privliges
     $admin_string = $is_admin ? '(admin)' : '(user)';
     $email = $auth->get_email_of($_SESSION['user']); // email string
-    $email_string = isset($email) 
+    $email_string = isset($email)
     ? '<span>Email address: <u>'.$email.'</u></span>' : "<span>No email address provided.</span>";
 }
 
@@ -47,8 +47,6 @@ if (isset($_SESSION['user']))
         </h2>
         <?php echo $email_string; ?>
         <br>
-        <a href=""></a>
-
         <a href="logout.php">Logout</a>
     <?php }?>
     <?php if (!$auth->is_authenticated()) {?>

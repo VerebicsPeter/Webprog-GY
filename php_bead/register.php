@@ -15,6 +15,9 @@ function validate($input, &$errors, $auth)
     if (is_empty($input, "password")) {
         $errors[] = "No password entered!";
     }
+    if (is_empty($input, "email")) {
+        $errors[] = "No email entered!";
+    }
     if (count($errors) == 0) {
         if ($auth->user_exists($input['username'])) {
             $errors[] = "Username already taken!";
@@ -59,7 +62,7 @@ if (count($_POST) != 0) {
         <label for="password"><span style="color: red;">*</span>Password:</label><br>
         <input id="password" name="password" type="password"><br>
 
-        <label for="password">Email address:</label><br>
+        <label for="email"><span style="color: red;">*</span>Email address:</label><br>
         <input id="email" name="email" type="email"><br>
 
         <input style="margin: 10px 0px 10px 0px;" type="submit" value="Register">
