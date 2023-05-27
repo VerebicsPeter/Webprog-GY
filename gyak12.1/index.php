@@ -18,7 +18,7 @@ $categories = ["Étel", "Ital", "Ruha"];
 
 <body>
     <ul>
-        <?php
+<?php
 foreach ($categories as $c) {
     echo "<li><a href=\"products.php?category=" . $c . "\">" . $c . "</a></li>";
 }

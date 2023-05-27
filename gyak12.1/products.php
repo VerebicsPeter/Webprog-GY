@@ -15,7 +15,7 @@ if (count($_POST) != 0) {
     if (!isset($_SESSION["products"])) {
         $_SESSION["products"] = $_POST["products"];
     } else {
-        array_push($_SESSION["products"], ...$_POST["products"]); //spread operator
+        array_push($_SESSION["products"], ...$_POST["products"]); // spread operator
     }
 }
 ?>
@@ -34,7 +34,7 @@ if (count($_POST) != 0) {
 
     <form action="" method="post">
 
-        <?php
+<?php
 $i = 0;
 foreach ($products as $p) {
     echo '<input type="checkbox" id="' . $i . '" name="products[]" value="' . $p->name . '">';
