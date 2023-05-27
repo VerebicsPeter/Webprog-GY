@@ -59,10 +59,21 @@ if (isset($_SESSION['user']))
     <hr style="width:100%">
 
     <h2>Playlists</h2>
+    <!--TODO: proper filtering-->
     <?php foreach ($playlist_repository->all() as $playlist) {?>
-        <article>
+        <article style="padding: 10px; border: 1px solid black; width: 75%;">
         <h3><?=$playlist->name?></h3>
+        <div style="margin-top: 10px;">
+        <b>Tracks:</b>
+        <?php
+        $tracks = (array) $playlist->tracks; echo count($tracks);
+        ?>
+        </div>
         <span>created by: <?=$playlist->creator?></span>
+        <br>
+        <button style="margin-top: 10px;">
+            View
+        </button>
         </article>
     <?php }?>
 </body>

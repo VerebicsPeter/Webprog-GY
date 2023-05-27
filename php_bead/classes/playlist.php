@@ -6,12 +6,14 @@ class Playlist
     public $_id = null;
     public $name;
     public $creator;
+    public $public;
     public $tracks;
 
-    public function __construct($name = null, $creator = null, $tracks = null)
+    public function __construct($name = null, $creator = null, $public = null, $tracks = null)
     {
         $this->name = $name;
         $this->creator = $creator;
+        $this->public = $public;
         $this->tracks = $tracks;
     }
 
