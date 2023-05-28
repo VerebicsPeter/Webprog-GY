@@ -60,9 +60,9 @@ class Auth
         });
         if (count($users) === 1) {
             $user = (array) array_values($users)[0];
-            if (isset($user['is_admin'])) return $user['is_admin'] === 'true' ? true : false;
+            if (isset($user['is_admin'])) return $user['is_admin'] === 'true';
         }
-        return null;
+        return false;
     }
 
     public function is_authenticated()

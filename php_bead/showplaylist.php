@@ -20,15 +20,13 @@ if (count($_GET) != 0)
         $tracks[$track_id] = $track_repository->get_track_by_id($track_id);
     }
 }
+
 // only public playlists can be viewed by guests
-if (!$auth->is_authenticated() and !($playlist->public === 'true')) {
-    header('Location: index.php');
-    die();
-}
+if (!$auth->is_authenticated() && !($playlist->public === 'true')) {header('Location: index.php'); die();}
+
 $editable = false;
-if (isset($_SESSION['user'])) {
-    $editable = $_SESSION['user'] === $playlist->creator or $auth->is_admin($_SESSION['user']);
-}
+if (isset($_SESSION['user']))
+    $editable = $_SESSION['user'] === $playlist->creator || $auth->is_admin($_SESSION['user']);
 
 ?>
 
