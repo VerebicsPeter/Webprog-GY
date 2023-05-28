@@ -49,7 +49,7 @@ if (count($_POST) != 0) {
     else
     if (isset($_POST["create"])){
         if (validate($_POST, $errors)) {
-            $is_public = empty($_POST['is_public']) ? "true" : "false";
+            $is_public = isset($_POST['is_public']) && $_POST['is_public'] === "on" ? "true" : "false";
             $plist_repository->add(new Playlist($_POST["pname"], $_SESSION["user"], $is_public, $_SESSION["tracks"]));
             unset($_SESSION["tracks"]);
             header('Location: index.php');
@@ -81,8 +81,7 @@ if (count($_POST) != 0) {
     <?php }?>
     <form action="" method="post">
         <label for="pname">Playlist name:</label><br>
-        <input id="pname" name="pname" type="text" placeholder="Name your playlist."
-        value="<?php if (isset($_POST['pname'])) echo $_POST['pname'];?>"><br>
+        <input id="pname" name="pname" type="text" placeholder="Name your playlist"><br>
 
         <label>Playlist tracks:</label><br>
         <?php
