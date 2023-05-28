@@ -18,6 +18,7 @@
                 "year": "2007",
                 "genres": ["balkan", "latin"]
             }
-        ]
+        ],
+        "public": "true"
     }
 }

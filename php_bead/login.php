@@ -54,7 +54,7 @@ if (count($_POST) != 0) {
         <?php }?>
     </ul>
     <?php }?>
-    <form action="" method="post">
+    <form action="" method="post" novalidate>
         <label for="username">Username:</label><br>
         <input id="username" name="username" type="text"><br>
         <label for="password">Password:</label><br>

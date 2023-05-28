@@ -52,9 +52,16 @@ class TrackRepository
     {
         return $this->convert($this->storage->all());
     }
-    public function add(Track $post): string
+    public function add(Track $track): string
     {
-        return $this->storage->insert($post);
+        return $this->storage->insert($track);
+    }
+    public function get_track_by_id(string $id = null) : Track
+    {
+        foreach ($this->all() as $track) {
+            if ($track->_id === $id) return $track;
+        }
+        return null;
     }
 }
 

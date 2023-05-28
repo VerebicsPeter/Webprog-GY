@@ -24,6 +24,7 @@ class Playlist
         $instance->name = $arr['name'] ?? null;
         $instance->creator = $arr['creator'] ?? null;
         $instance->tracks = $arr['tracks'] ?? null;
+        $instance->public = $arr['public'] ?? null;
         return $instance;
     }
 
@@ -48,9 +49,15 @@ class PlaylistRepository
     {
         return $this->convert($this->storage->all());
     }
-    public function add(Playlist $post): string
+    public function add(Playlist $playlist): string
     {
-        return $this->storage->insert($post);
+        return $this->storage->insert($playlist);
+    }
+    public function get_playlist_by_id(string $id = null) : Playlist
+    {
+        $result = $this->all()[$id];
+        if (isset($result)) return $result;
+        return null;
     }
 }
 ?>

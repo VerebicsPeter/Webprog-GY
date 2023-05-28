@@ -8,7 +8,8 @@ require_once "classes/playlist.php";
 session_start();
 $auth = new Auth();
 
-$playlist_repository = new PlaylistRepository();
+$plist_repository = new PlaylistRepository();
+$track_repository = new TrackRepository();
 
 $is_admin;
 $admin_string = '';
@@ -56,9 +57,21 @@ if (isset($_SESSION['user']))
     
     <hr style="width:100%">
 
+    <form action="" novalidate>
+        <input id="search" name="search" type="text" placeholder="search"
+        onkeyup="">
+        <input style="margin: 0px 10px 0px 10px;" type="submit" value="Search">
+    </form>
+
+    <div id="tracks">
+        <!--user ajax to show results-->
+    </div>
+
+    <hr style="width:100%">
+
     <h2>Playlists</h2>
     <!--TODO: proper filtering-->
-    <?php foreach ($playlist_repository->all() as $playlist) {?>
+    <?php foreach ($plist_repository->all() as $playlist) {?>
         <article style="padding: 10px; border: 1px solid black; width: 75%;">
         <h3><?=$playlist->name?></h3>
         <div style="margin-top: 10px;">
@@ -67,11 +80,11 @@ if (isset($_SESSION['user']))
         $tracks = (array) $playlist->tracks; echo count($tracks);
         ?>
         </div>
-        <span>created by: <?=$playlist->creator?></span>
+        <span>created by: <?=$playlist->creator?> </span>
         <br>
-        <button style="margin-top: 10px;">
-            View
-        </button>
+        <a style="margin-top: 10px;" href=<?='showplaylist.php?id='.$playlist->_id?>>
+        View
+        </a>
         </article>
     <?php }?>
 </body>
