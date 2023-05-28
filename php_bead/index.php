@@ -44,10 +44,13 @@ if (count($_GET) != 0) {
 <body>
     <h1>Listify</h1>
 
-    <p>Welcome to <b>Listify</b>! Listify is a basic webapp made with stock php, where you can create your own music playlists and browse the playlists created by other users or search for playlists containing your favourite tracks.</p>
+    <section id="about">
+        <p>Welcome to <b>Listify</b>! Listify is a basic webapp made with stock php, where you can create your own music playlists and browse the playlists created by other users or search for playlists containing your favourite tracks.</p>
+    </section>
 
     <hr style="width:100%">
 
+    <section id="user">
     <?php if ($auth->is_authenticated()) {?>
         <h2>Logged in as 
         <?php echo $_SESSION["user"]; ?>
@@ -61,27 +64,29 @@ if (count($_GET) != 0) {
         <h2>Logged in as guest.</h2>
         <a style="padding: 5px;" href="login.php">Login</a>
     <?php }?>
+    </section>
     
     <hr style="width:100%">
 
+    <section id="track_search">
     <form action="" method="get" novalidate>
         <input id="search" name="search" type="text" placeholder="search" onkeyup="">
         <input style="margin: 0px 10px 0px 10px;" type="submit" value="Search">
     </form>
-
-    <!--TODO: use ajax to show results-->
+    <!--TODO: use ajax to show results instead of this-->
     <div id="tracks">
         <?php
             if (isset($selected_tracks)) {
                 foreach ($selected_tracks as $track) {
                     echo $track->title.' - '.$track->artist.'<br>';
-                }
-            }
+                }}
         ?>
     </div>
-
+    </section>
+    
     <hr style="width:100%">
 
+    <section id="playlists">
     <h2>Playlists</h2>
     <!--TODO: proper filtering-->
     <?php foreach ($plist_repository->all() as $playlist) {?>
@@ -98,5 +103,6 @@ if (count($_GET) != 0) {
         <a style="margin-top: 10px;" href=<?='showplaylist.php?id='.$playlist->_id?>>View</a>
         </article>
     <?php }?>
+    </section>
 </body>
 </html>
