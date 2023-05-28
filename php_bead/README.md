@@ -15,7 +15,7 @@ A listában tegyél `[X]` jelet minden olyan feladat elé, amelyet legalább ré
 
 ## Kötelezően teljesítendő (enélkül nem fogadjuk el, 8 pont)
 
-[ ] Egyéb: a "Beadott munka tisztasága" részben szereplő `README.md` állomány hiánytalanul kitöltve szerepel a feltöltött csomagban (0 pont)
+[X] Egyéb: a "Beadott munka tisztasága" részben szereplő `README.md` állomány hiánytalanul kitöltve szerepel a feltöltött csomagban (0 pont)
 [ ] Főoldal: megjelenik az összes publikus lejátszási lista neve (1 pont)
 [ ] Főoldal: megjelenik az lejátszási listában található zeneszámok darabszáma és a listát létrehozó felhasználó neve is (1 pont)
 [ ] Főoldal: egy lejátszási listára kattintva megjelenik az adott lejátszási lista részletező oldala (1 pont)

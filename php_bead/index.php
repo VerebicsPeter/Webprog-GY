@@ -25,6 +25,10 @@ if (isset($_SESSION['user']))
     ? '<span>Email address: <u>'.$email.'</u></span>' : "<span>No email address provided.</span>";
 }
 
+$selected_tracks;
+if (count($_GET) != 0) {
+    $selected_tracks = $track_repository->get_tracks_by_title($_GET['search']);
+}
 ?>
 
 <html>
@@ -33,6 +37,9 @@ if (isset($_SESSION['user']))
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listify - Home</title>
+    <script>
+
+    </script>
 </head>
 <body>
     <h1>Listify</h1>
@@ -57,14 +64,20 @@ if (isset($_SESSION['user']))
     
     <hr style="width:100%">
 
-    <form action="" novalidate>
-        <input id="search" name="search" type="text" placeholder="search"
-        onkeyup="">
+    <form action="" method="get" novalidate>
+        <input id="search" name="search" type="text" placeholder="search" onkeyup="">
         <input style="margin: 0px 10px 0px 10px;" type="submit" value="Search">
     </form>
 
+    <!--TODO: use ajax to show results-->
     <div id="tracks">
-        <!--user ajax to show results-->
+        <?php
+            if (isset($selected_tracks)) {
+                foreach ($selected_tracks as $track) {
+                    echo $track->title.' - '.$track->artist.'<br>';
+                }
+            }
+        ?>
     </div>
 
     <hr style="width:100%">
@@ -77,14 +90,12 @@ if (isset($_SESSION['user']))
         <div style="margin-top: 10px;">
         <b>Tracks:</b>
         <?php
-        $tracks = (array) $playlist->tracks; echo count($tracks);
+            $tracks = (array) $playlist->tracks; echo count($tracks);
         ?>
         </div>
         <span>created by: <?=$playlist->creator?> </span>
         <br>
-        <a style="margin-top: 10px;" href=<?='showplaylist.php?id='.$playlist->_id?>>
-        View
-        </a>
+        <a style="margin-top: 10px;" href=<?='showplaylist.php?id='.$playlist->_id?>>View</a>
         </article>
     <?php }?>
 </body>

@@ -63,6 +63,12 @@ class TrackRepository
         }
         return null;
     }
+    public function get_tracks_by_title(string $title = null) : array
+    {
+        return $this->convert($this->storage->filter(function ($track) use ($title) {
+            return str_contains($track->title, $title);
+        }));
+    }
 }
 
 ?>

@@ -11,23 +11,24 @@ $auth = new Auth();
 $plist_repository = new PlaylistRepository();
 $track_repository = new TrackRepository();
 
-$playlist; $tracks;
+$playlist; $playlist_length = 0;
+$tracks;
 
 if (count($_GET) != 0)
 {
     $playlist = $plist_repository->get_playlist_by_id($_GET['id']);
     foreach ($playlist->tracks as $track_id) {
-        $tracks[$track_id] = $track_repository->get_track_by_id($track_id);
+        $track = $track_repository->get_track_by_id($track_id);
+        $tracks[$track_id] = $track;
+        $playlist_length += intval($track->length);
     }
 }
-
 // only public playlists can be viewed by guests
 if (!$auth->is_authenticated() && !($playlist->public === 'true')) {header('Location: index.php'); die();}
 
 $editable = false;
 if (isset($_SESSION['user']))
     $editable = $_SESSION['user'] === $playlist->creator || $auth->is_admin($_SESSION['user']);
-
 ?>
 
 <html>
@@ -42,11 +43,12 @@ if (isset($_SESSION['user']))
         <h2><?=$playlist->name?></h2>
         <div style="margin-top: 10px;">
         <hr>
+        <span>length:<?=gmdate("H:i:s", $playlist_length)?></span><br>
         <h3>Tracks:</h3>
         <?php
-        foreach ($tracks as $track) {
-            echo $track->title.' - '.$track->artist.'<br>';
-        }
+            foreach ($tracks as $track) {
+                echo $track->title.' - '.$track->artist.'<br>';
+            }
         ?>
         </div>
         <hr>
@@ -55,6 +57,6 @@ if (isset($_SESSION['user']))
         ?>
         <span>created by: <?=$playlist->creator?> </span>
     </article>
-    <a href="index.php">Back</a>
+    <a href="index.php">Home</a>
 </body>
 </html>
