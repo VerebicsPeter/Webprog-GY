@@ -49,6 +49,7 @@ if (count($_POST) != 0) {
 </head>
 
 <body>
+    <section id="login" class="container">
     <h2>Login</h2>
     <?php if ($errors) {?>
     <ul>
@@ -62,9 +63,15 @@ if (count($_POST) != 0) {
         <input id="username" name="username" type="text"><br>
         <label for="password">Password:</label><br>
         <input id="password" name="password" type="password"><br>
-        <input style="margin: 10px 0px 10px 0px;" type="submit" value="Login">
+        <input class="mt-1" type="submit" value="Login">
     </form>
-    <a href="index.php">Home</a>
-    <a href="register.php">Register</a>
+    </section>
+
+    <hr>
+
+    <section id="navlinks" class="container">
+        <a href="index.php" class="m-2">Home</a>
+        <a href="register.php" class="m-2">Register</a>
+    </section>
 </body>
 </html>

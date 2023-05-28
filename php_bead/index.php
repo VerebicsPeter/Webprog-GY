@@ -27,8 +27,18 @@ if (isset($_SESSION['user']))
 
 $selected_tracks;
 if (count($_GET) != 0) {
+    //if (strlen($_GET['search'])) {
     $selected_tracks = $track_repository->get_tracks_by_title($_GET['search']);
+    //}
 }
+
+$playlists = isset($is_admin) && $is_admin
+    ? $plist_repository->all()
+    : array_filter($plist_repository->all(), function ($playlist) {
+        if (isset($_SESSION['user'])) return $playlist->public === 'true' || $playlist->creator === $_SESSION['user'];
+        return $playlist->public === 'true';
+    });
+
 ?>
 
 <html>
@@ -42,15 +52,19 @@ if (count($_GET) != 0) {
     <title>Listify - Home</title>
 </head>
 <body>
-    <h1>Listify</h1>
+    <section id="title" class="container">
+        <h1>Listify</h1>
+    </section>
 
-    <section id="about">
+    <hr>
+
+    <section id="about" class="container">
         <p>Welcome to <b>Listify</b>! Listify is a basic webapp made with stock php, where you can create your own music playlists and browse the playlists created by other users or search for playlists containing your favourite tracks.</p>
     </section>
 
-    <hr style="width:100%">
+    <hr>
 
-    <section id="user">
+    <section id="user" class="container">
     <?php if ($auth->is_authenticated()) {?>
         <h2>Logged in as 
         <?php echo $_SESSION["user"]; ?>
@@ -58,49 +72,67 @@ if (count($_GET) != 0) {
         </h2>
         <?php echo $email_string; ?>
         <br>
-        <a href="logout.php">Logout</a>
+        <a class="mt-1" href="logout.php">Logout</a>
     <?php }?>
     <?php if (!$auth->is_authenticated()) {?>
         <h2>Logged in as guest.</h2>
-        <a style="padding: 5px;" href="login.php">Login</a>
+        <a class="mt-1" href="login.php">Login</a>
     <?php }?>
     </section>
     
-    <hr style="width:100%">
+    <hr>
 
-    <section id="track_search">
+    <section id="search_track_section" class="container">
+    <h2>Search for a track</h2>
     <form action="" method="get" novalidate>
-        <input id="search" name="search" type="text" placeholder="search" onkeyup="">
-        <input style="margin: 0px 10px 0px 10px;" type="submit" value="Search">
+        <input id="search" name="search" type="text" placeholder="Tracks title" onkeyup="" class="w-25">
+        <input type="submit" value="Search">
     </form>
     <!--TODO: use ajax to show results instead of this-->
-    <div id="tracks">
+    <div id="tracks" class="container">
         <?php
             if (isset($selected_tracks)) {
-                foreach ($selected_tracks as $track) {
-                    echo $track->title.' - '.$track->artist.'<br>';
-                }}
+                if (count($selected_tracks) === 0)
+                echo '<div class="alert alert-info">No results found.</div>';
+                else {
+                    echo '<table class="table table-bordered">
+                            <tr>
+                                <th>Title</th>
+                                <th>Artist</th>
+                                <th>Genres</th>
+                                <th>Year</th>
+                            </tr>';
+                    foreach ($selected_tracks as $track) {
+                        echo '<tr>';
+                        echo '<td>'.$track->title.'</td>';
+                        echo '<td>'.$track->artist.'</td>';
+                        echo '<td>'.$track->get_genre_string().'</td>';
+                        echo '<td>'.$track->year.'</td>';
+                        echo '</tr>';
+                    }
+                    echo '</table>';
+                }
+            }
         ?>
     </div>
     </section>
     
-    <hr style="width:100%">
+    <hr>
 
-    <section id="playlists">
+    <section id="playlists" class="container">
     <h2>Playlists</h2>
     <!--TODO: proper filtering-->
-    <?php foreach ($plist_repository->all() as $playlist) {?>
-        <article style="padding: 10px; border: 1px solid black; width: 75%;">
+    <?php foreach ($playlists as $playlist) {?>
+        <article class="media border border-primary rounded w-75 mb-1 p-3">
         <h3><?=$playlist->name?></h3>
-        <div style="margin-top: 10px;">
-        <b>Tracks:</b>
-        <?php
-            $tracks = (array) $playlist->tracks; echo count($tracks);
-        ?>
+        <div class="mt-1">
+            <b>Tracks:</b>
+            <?php
+                $tracks = (array) $playlist->tracks; echo count($tracks);
+            ?>
         </div>
-        <span>created by: <?=$playlist->creator?> </span>
-        <br>
-        <a style="margin-top: 10px;" href=<?='showplaylist.php?id='.$playlist->_id?>>View</a>
+        <span>created by: <?=$playlist->creator?></span><br>
+        <a href=<?='showplaylist.php?id='.$playlist->_id?> class="mt-1">View</a>
         </article>
     <?php }?>
     </section>

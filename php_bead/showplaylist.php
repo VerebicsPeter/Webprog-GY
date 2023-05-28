@@ -42,24 +42,47 @@ if (isset($_SESSION['user']))
     <title>Listify - Playlist</title>
 </head>
 <body>
-    <article style="padding: 10px; border: 1px solid black; width: 75%;">
+    <section class="container mt-2">
+    <article class="border border-primary rounded mb-1 p-3">
         <h2><?=$playlist->name?></h2>
         <div style="margin-top: 10px;">
         <hr>
-        <span>length:<?=gmdate("H:i:s", $playlist_length)?></span><br>
+        <span>Length: <?=gmdate("H:i:s", $playlist_length)?></span><br>
+        <hr>
         <h3>Tracks:</h3>
         <?php
+            echo '<table class="table table-bordered">
+                    <tr>
+                        <th>Title</th>
+                        <th>Artist</th>
+                        <th>Genres</th>
+                        <th>Length</th>
+                        <th>Year</th>
+                    </tr>';
             foreach ($tracks as $track) {
-                echo $track->title.' - '.$track->artist.'<br>';
+                echo '<tr>';
+                echo '<td>'.$track->title.'</td>';
+                echo '<td>'.$track->artist.'</td>';
+                echo '<td>'.$track->get_genre_string().'</td>';
+                echo '<td>'.gmdate("i:s", intval($track->length)).'</td>';
+                echo '<td>'.$track->year.'</td>';
+                echo '</tr>';
             }
+            echo '</table>';
         ?>
         </div>
+        <hr>
+        <span>Created by: <b><?=$playlist->creator?></b></span><br>
         <hr>
         <?php 
             if ($editable) echo '<a href="editplaylist.php">Edit Playlist</a>'
         ?>
-        <span>created by: <?=$playlist->creator?> </span>
     </article>
-    <a href="index.php">Home</a>
+    </section>
+    
+    <hr>
+    <section class="container">
+        <a href="index.php" class="m-2">Home</a>
+    </section>
 </body>
 </html>

@@ -1,4 +1,5 @@
 <?php
+// TODO: password matching (2 input fields)
 require_once "classes/auth.php";
 
 $auth = new Auth();
@@ -8,22 +9,32 @@ function is_empty($input, $key)
     return !(isset($input[$key]) && trim($input[$key]) !== "");
 }
 function validate($input, &$errors, $auth)
-{
+{   // check if everything is entered
     if (is_empty($input, "username")) {
         $errors[] = "No username entered!";
     }
     if (is_empty($input, "password")) {
         $errors[] = "No password entered!";
     }
+    if (is_empty($input, "password_repeat")) {
+        $errors[] = "Password was not repeated!";
+    }
     if (is_empty($input, "email")) {
         $errors[] = "No email entered!";
     }
-    if (count($errors) == 0) {
-        if ($auth->user_exists($input['username'])) {
-            $errors[] = "Username already taken!";
-        }
+    // check if the email is valid
+    if (!filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
+        $errors[] = "Invalid email format!";
     }
-
+    // check if passwords match
+    if ($input['password'] !== $input['password_repeat']) {
+        $errors[] = "Passwords do not match!";
+    }
+    // check if username already exist
+    if (count($errors) == 0) {
+        if ($auth->user_exists($input['username']))
+            $errors[] = "Username already taken!";
+    }
     return !(bool) $errors;
 }
 
@@ -50,6 +61,7 @@ if (count($_POST) != 0) {
 </head>
 
 <body>
+    <section id="registration" class="container">
     <h2>Registration</h2>
     <?php if ($errors) {?>
     <ul>
@@ -59,17 +71,29 @@ if (count($_POST) != 0) {
     </ul>
     <?php }?>
     <form action="" method="post" novalidate>
-        <label for="username"><span style="color: red;">*</span>Username:</label><br>
-        <input id="username" name="username" type="text"><br>
+        <label for="username"><span>*</span>Username:</label><br>
+        <input id="username" name="username" type="text"
+        value="<?php if (isset($_POST['username'])) echo $_POST['username']; ?>"><br>
 
-        <label for="password"><span style="color: red;">*</span>Password:</label><br>
+        <label for="password"><span>*</span>Password:</label><br>
         <input id="password" name="password" type="password"><br>
 
-        <label for="email"><span style="color: red;">*</span>Email address:</label><br>
-        <input id="email" name="email" type="email"><br>
+        <label for="password-repeat"><span>*</span>Repeat password:</label><br>
+        <input id="password-repeat" name="password_repeat" type="password"><br>
 
-        <input style="margin: 10px 0px 10px 0px;" type="submit" value="Register">
+        <label for="email"><span>*</span>Email address:</label><br>
+        <input id="email" name="email" type="email"
+        value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>"><br>
+
+        <input class="mt-1" type="submit" value="Register">
     </form>
-    <a href="login.php">Login</a>
+    </section>
+    
+    <hr>
+
+    <section id="navlinks" class="container">
+        <a href="login.php" class="m-2">Login</a>
+    </section>
+
 </body>
 </html>

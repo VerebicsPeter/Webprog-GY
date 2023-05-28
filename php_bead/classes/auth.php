@@ -9,8 +9,10 @@ class Auth
     }
 
     public function register($user)
-    {
-        $user['password'] = password_hash($user['password'], PASSWORD_DEFAULT); // hash password
+    {   // unset the 'password repeat' field
+        if (isset($user['password_repeat'])) unset($user['password_repeat']);
+        // hash the password given password
+        $user['password'] = password_hash($user['password'], PASSWORD_DEFAULT);
         return $this->userRepository->insert((object) $user);
     }
 

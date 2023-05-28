@@ -35,6 +35,11 @@ class Track
     {
         return self::from_array((array) $obj);
     }
+
+    public function get_genre_string() : string
+    {
+        return implode(", ", $this->genres);
+    }
 }
 
 class TrackRepository
