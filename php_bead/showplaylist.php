@@ -53,7 +53,7 @@ if (isset($_SESSION['user'])) {
         </div>
         <hr>
         <?php 
-            if ($editable) echo '<a href="edtitplaylist.php">Edit Playlist</a>'
+            if ($editable) echo '<a href="editplaylist.php">Edit Playlist</a>'
         ?>
         <span>created by: <?=$playlist->creator?> </span>
     </article>
