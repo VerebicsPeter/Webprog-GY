@@ -16,6 +16,8 @@ $admin_string = '';
 $email;
 $email_string = '';
 
+$_SESSION["tracks"] = []; // reset the picked track
+
 if (isset($_SESSION['user']))
 {
     $is_admin = $auth->is_admin($_SESSION['user']); // admin privliges
@@ -65,19 +67,31 @@ $playlists = isset($is_admin) && $is_admin
     <hr>
 
     <section id="user" class="container">
-    <?php if ($auth->is_authenticated()) {?>
-        <h2>Logged in as 
-        <?php echo $_SESSION["user"]; ?>
-        <?php echo $admin_string; ?>.
-        </h2>
-        <?php echo $email_string; ?>
-        <br>
+    <div class="row">
+        <div class="col">
+        <?php if ($auth->is_authenticated()) {?>
+            <h2>Logged in as 
+            <?php echo $_SESSION["user"]; ?>
+            <?php echo $admin_string; ?>.
+            </h2>
+            <?php echo $email_string; ?>
+            <br>
         <a class="mt-1" href="logout.php">Logout</a>
-    <?php }?>
-    <?php if (!$auth->is_authenticated()) {?>
-        <h2>Logged in as guest.</h2>
-        <a class="mt-1" href="login.php">Login</a>
-    <?php }?>
+        <?php }?>
+        <?php if (!$auth->is_authenticated()) {?>
+            <h2>Logged in as guest.</h2>
+            <a class="mt-1" href="login.php">Login</a>
+        <?php }?>
+        </div>
+        <!--add new playlist col-->
+        <div class="col">
+        <?php if ($auth->is_authenticated()) {?>
+            <h2>New playlist</h2>
+            Create a new playlist!<br>
+            <a class="mt-1" href="createplaylist.php">New playlist</a>
+        <?php }?>
+        </div>
+    </div>
     </section>
     
     <hr>
@@ -85,7 +99,7 @@ $playlists = isset($is_admin) && $is_admin
     <section id="search_track_section" class="container">
     <h2>Search for a track</h2>
     <form action="" method="get" novalidate>
-        <input id="search" name="search" type="text" placeholder="Tracks title" onkeyup="" class="w-25">
+        <input id="search" name="search" type="text" placeholder="Track's title ..." onkeyup="" class="w-25">
         <input type="submit" value="Search">
     </form>
     <!--TODO: use ajax to show results instead of this-->
@@ -136,5 +150,7 @@ $playlists = isset($is_admin) && $is_admin
         </article>
     <?php }?>
     </section>
+
+    <hr>
 </body>
 </html>

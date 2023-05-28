@@ -16,10 +16,11 @@ $tracks;
 
 if (count($_GET) != 0)
 {
+    $count = 0;
     $playlist = $plist_repository->get_playlist_by_id($_GET['id']);
     foreach ($playlist->tracks as $track_id) {
         $track = $track_repository->get_track_by_id($track_id);
-        $tracks[$track_id] = $track;
+        $tracks[$count] = $track; $count++;
         $playlist_length += intval($track->length);
     }
 }

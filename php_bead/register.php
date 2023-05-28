@@ -1,5 +1,4 @@
 <?php
-// TODO: password matching (2 input fields)
 require_once "classes/auth.php";
 
 $auth = new Auth();
