@@ -53,7 +53,7 @@ $playlists = isset($is_admin) && $is_admin
 </head>
 <body>
     <section id="title" class="container">
-        <h1>Listify</h1>
+        <h1><a class="navbar-brand" href="index.php">Listify</a></h1>
     </section>
 
     <hr>
