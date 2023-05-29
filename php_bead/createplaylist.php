@@ -119,7 +119,9 @@ if (count($_POST) != 0) {
                         <th scope="col" class="col-6">Artist</th>
                         <th scope="col" class="col-1">Add</th>
                     </tr>';
-            foreach ($track_repository->all() as $track) {
+            $arr = $track_repository->all();
+            $sorted = usort($arr, function ($a, $b) {return strcmp($a->title, $b->title);});
+            foreach ($arr as $track) {
                 echo '<tr>';
                 echo '<td>'.$track->title.'</td>';
                 echo '<td>'.$track->artist.'</td>';

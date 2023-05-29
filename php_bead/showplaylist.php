@@ -14,8 +14,7 @@ $track_repository = new TrackRepository();
 $playlist; $playlist_length = 0;
 $tracks;
 
-if (count($_GET) != 0)
-{
+if (count($_GET) != 0) {
     $count = 0;
     $playlist = $plist_repository->get_playlist_by_id($_GET['id']);
     foreach ($playlist->tracks as $track_id) {
@@ -30,6 +29,8 @@ if (!$auth->is_authenticated() && !($playlist->public === 'true')) {header('Loca
 $editable = false;
 if (isset($_SESSION['user']))
     $editable = $_SESSION['user'] === $playlist->creator || $auth->is_admin($_SESSION['user']);
+
+if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
 ?>
 
 <html>
@@ -76,7 +77,7 @@ if (isset($_SESSION['user']))
         <span>Created by: <b><?=$playlist->creator?></b></span><br>
         <hr>
         <?php 
-            if ($editable) echo '<a href="editplaylist.php">Edit Playlist</a>'
+            if ($editable) echo '<a href="editplaylist.php?id='.$playlist->_id.'">Edit Playlist</a>'
         ?>
     </article>
     </section>

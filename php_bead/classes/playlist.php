@@ -53,6 +53,13 @@ class PlaylistRepository
     {
         return $this->storage->insert($playlist);
     }
+    public function update_tracks(Playlist $playlist, array $tracks)
+    {
+        $this->storage->update(
+            function ($p) use ($playlist) {return $p->_id === $playlist->_id;}, // match by id
+            function ($p) use ($tracks) {$p->tracks = $tracks;}                 // set the tracks
+        );
+    }
     public function get_playlist_by_id(string $id = null) : Playlist
     {
         $result = $this->all()[$id];

@@ -16,8 +16,6 @@ $admin_string = '';
 $email;
 $email_string = '';
 
-$_SESSION["tracks"] = []; // reset the picked track
-
 if (isset($_SESSION['user']))
 {
     $is_admin = $auth->is_admin($_SESSION['user']); // admin privliges
@@ -29,9 +27,7 @@ if (isset($_SESSION['user']))
 
 $selected_tracks;
 if (count($_GET) != 0) {
-    //if (strlen($_GET['search'])) {
     $selected_tracks = $track_repository->get_tracks_by_title($_GET['search']);
-    //}
 }
 
 $playlists = isset($is_admin) && $is_admin
@@ -41,6 +37,7 @@ $playlists = isset($is_admin) && $is_admin
         return $playlist->public === 'true';
     });
 
+if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
 ?>
 
 <html>
