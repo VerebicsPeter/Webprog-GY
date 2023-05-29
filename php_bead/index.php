@@ -93,11 +93,13 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
     
     <hr>
 
-    <section id="search_track_section" class="container">
+    <section id="search_track" class="container">
     <h2>Search for a track</h2>
     <form action="" method="get" novalidate>
-        <input id="search" name="search" type="text" placeholder="Track's title ..." onkeyup="" class="w-25">
-        <input type="submit" value="Search">
+    <div class="input-group w-25">
+        <input id="search" name="search" type="text" placeholder="Track's title ..." onkeyup="" class="form-control">
+        <input type="submit" value="Search" class="btn btn-sm btn-primary">
+    </div>
     </form>
     <!--TODO: use ajax to show results instead of this-->
     <div id="tracks" class="container">

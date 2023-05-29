@@ -84,7 +84,7 @@ if (count($_POST) != 0) {
         <input id="email" name="email" type="email"
         value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>"><br>
 
-        <input class="mt-1" type="submit" value="Register">
+        <input class="mt-1 btn btn-sm btn-primary" type="submit" value="Register">
     </form>
     </section>
     

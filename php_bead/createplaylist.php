@@ -26,7 +26,7 @@ function validate($input, &$errors)
     if (is_empty($input, "pname")){
         $errors[] = "You must enter the playlist name!";
     }
-    if (count($_SESSION["tracks"])===0){
+    if (count($_SESSION['tracks']) === 0){
         $errors[] = "No tracks added!";
     }
 
@@ -35,23 +35,25 @@ function validate($input, &$errors)
 
 $errors = [];
 if (count($_POST) != 0) {
-    if (!isset($_SESSION["tracks"])){
-        $_SESSION["tracks"] = $_POST["tracks"];
+    if (!isset($_SESSION['tracks'])
+        && isset($_POST['tracks'])){
+        $_SESSION['tracks'] = $_POST['tracks'];
     }
     else
-    if (isset($_POST["tracks"])){
-        array_push($_SESSION["tracks"], ...$_POST["tracks"]);
+    if (isset($_POST['tracks'])){
+        array_push($_SESSION['tracks'], ...$_POST['tracks']);
     }
     else
-    if (isset($_POST["clear"])){
-        unset($_SESSION["tracks"]); $_SESSION["tracks"] = [];
+    if (isset($_POST['clear'])){
+        $_SESSION['tracks'] = [];
     }
     else
     if (isset($_POST["create"])){
         if (validate($_POST, $errors)) {
-            $is_public = isset($_POST['is_public']) && $_POST['is_public'] === "on" ? "true" : "false";
-            $plist_repository->add(new Playlist($_POST["pname"], $_SESSION["user"], $is_public, $_SESSION["tracks"]));
-            unset($_SESSION["tracks"]);
+            $is_public = isset($_POST['is_public']) && $_POST['is_public'] === "on"
+            ? "true" : "false";
+            $plist_repository->add(new Playlist($_POST['pname'], $_SESSION['user'], $is_public, $_SESSION['tracks']));
+            unset($_SESSION['tracks']);
             header('Location: index.php');
         }
     }
@@ -81,7 +83,8 @@ if (count($_POST) != 0) {
     <?php }?>
     <form action="" method="post">
         <label for="pname">Playlist name:</label><br>
-        <input id="pname" name="pname" type="text" placeholder="Name your playlist"><br>
+        <input id="pname" name="pname" type="text" placeholder="Name your playlist" 
+        value="<?php if (isset($_POST['pname'])) echo $_POST['pname'] ?>"><br>
 
         <label>Playlist tracks:</label><br>
         <?php

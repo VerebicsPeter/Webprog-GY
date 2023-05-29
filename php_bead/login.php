@@ -63,7 +63,7 @@ if (count($_POST) != 0) {
         <input id="username" name="username" type="text"><br>
         <label for="password">Password:</label><br>
         <input id="password" name="password" type="password"><br>
-        <input class="mt-1" type="submit" value="Login">
+        <input class="mt-1 btn btn-sm btn-primary" type="submit" value="Login">
     </form>
     </section>
 
