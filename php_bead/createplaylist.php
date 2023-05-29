@@ -26,7 +26,7 @@ function validate($input, &$errors)
     if (is_empty($input, "pname")){
         $errors[] = "You must enter the playlist name!";
     }
-    if (count($_SESSION['tracks']) === 0){
+    if (!isset($_SESSION['tracks']) || count($_SESSION['tracks']) === 0){
         $errors[] = "No tracks added!";
     }
 
