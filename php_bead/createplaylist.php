@@ -83,7 +83,7 @@ if (count($_POST) != 0) {
     <?php }?>
     <form action="" method="post">
         <label for="pname">Playlist name:</label><br>
-        <input id="pname" name="pname" type="text" placeholder="name your playlist" 
+        <input id="pname" name="pname" type="text" placeholder="name your playlist" class="mb-3"
         value="<?php if (isset($_POST['pname'])) echo $_POST['pname'] ?>"><br>
 
         <label>Playlist tracks:</label><br>
@@ -106,7 +106,7 @@ if (count($_POST) != 0) {
         ?>
 
         <label for="is_public">Public:</label>
-        <input id="is_public" name="is_public" type="checkbox"><br>
+        <input id="is_public" name="is_public" type="checkbox" class="mb-3"><br>
 
         <input class="mt-1 btn btn-sm btn-primary" type="submit" name="create" value="Create playlist">
         <input class="mt-1 btn btn-sm btn-secondary" type="submit" name="clear" value="Clear tracks">
