@@ -66,7 +66,7 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
     <hr>
 
     <section id="about" class="container">
-        <p>Welcome to <b>Listify</b>! Listify is a basic webapp made with stock php, where you can create your own music playlists and browse the playlists created by other users or search for playlists containing your favourite tracks.</p>
+        <p class="w-75">Welcome to <b>Listify</b>! Listify is a simple webapp made with stock php, where you can create your own music playlists and browse the playlists created by other users or search for tracks in the library of the app.</p>
     </section>
 
     <hr>
