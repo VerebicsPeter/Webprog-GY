@@ -92,7 +92,8 @@ if (count($_POST) != 0){
     </section>
     <hr>
     <section class="container">
-        <a href="index.php">Home</a>
+        <a href="index.php" class="m-2">Home</a>
     </section>
+    <hr>
 </body>
 </html>

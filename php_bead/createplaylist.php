@@ -143,5 +143,6 @@ if (count($_POST) != 0) {
     <section class="container">
         <a href="index.php" class="m-2">Home</a>
     </section>
+    <hr>
 </body>
 </html>

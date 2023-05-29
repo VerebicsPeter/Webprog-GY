@@ -94,5 +94,6 @@ if (count($_POST) != 0) {
         <a href="login.php" class="m-2">Login</a>
     </section>
 
+    <hr>
 </body>
 </html>

@@ -73,5 +73,7 @@ if (count($_POST) != 0) {
         <a href="index.php" class="m-2">Home</a>
         <a href="register.php" class="m-2">Register</a>
     </section>
+    
+    <hr>
 </body>
 </html>

@@ -141,5 +141,6 @@ if (count($_POST) != 0) {
         <a href="index.php" class="m-2">Home</a>
         <a href=<?='showplaylist.php?id='.$playlist->_id?> class="m-2">Back</a>
     </section>
+    <hr>
 </body>
 </html>

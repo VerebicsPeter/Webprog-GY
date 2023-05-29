@@ -86,5 +86,6 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
     <section class="container">
         <a href="index.php" class="m-2">Home</a>
     </section>
+    <hr>
 </body>
 </html>
