@@ -12,7 +12,8 @@ $plist_repository = new PlaylistRepository();
 $track_repository = new TrackRepository();
 
 $is_admin; $admin_string = '';
-$email; $email_string = '';
+$email; 
+$email_string = '';
 
 if (isset($_SESSION['user']))
 {
@@ -21,11 +22,6 @@ if (isset($_SESSION['user']))
     $email = $auth->get_email_of($_SESSION['user']); // email string
     $email_string = isset($email)
     ? '<span>Email address: <u>'.$email.'</u></span>' : "<span>No email address provided.</span>";
-}
-
-$selected_tracks;
-if (count($_GET) != 0) {
-    $selected_tracks = $track_repository->get_tracks_by_title($_GET['search']);
 }
 
 $playlists = isset($is_admin) && $is_admin
@@ -43,10 +39,28 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
     <!--Bootstrap-5-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listify - Home</title>
+    <!-- Ajax search -->
+    <script>
+$(document).ready(function() {
+    $('#search').on('input', function() {
+        var searchValue = $(this).val();
+        $.ajax({
+            url: 'search.php',
+            type:'GET',
+            data: { search: searchValue },
+            success: function(response)
+            {
+                $('#tracks').html(response);
+            }
+        });
+    });
+});
+</script>
 </head>
 <body>
     <section id="title" class="container">
@@ -91,18 +105,16 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
     
     <hr>
 
-    <section id="search_track" class="container">
+    <section id="searchbar" class="container">
     <div class="row">
         <div class="col">
         <h2>Search for a track</h2>
-        <form action="" method="get" novalidate>
+        <form action="" method="" novalidate>
             <div class="input-group w-75">
                 <input id="search" name="search" type="text" placeholder="Track's title ..." onkeyup="" class="form-control">
-                <input type="submit" value="Search" class="btn btn-sm btn-primary">
             </div>
         </form>
         </div>
-        <!--TODO: use ajax to show results instead of this-->
         <div class="col">
         <?php if ($auth->is_authenticated() && $is_admin) {?>
             <h2>New Track</h2>
@@ -112,34 +124,7 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
         </div>
     </div>
     <div id="tracks" class="container">
-        <?php
-            if (isset($selected_tracks)) {
-                if ($auth->is_admin()) echo '<hr>';
-                if (count($selected_tracks) === 0)
-                echo '<div class="alert alert-info">No results found.</div>';
-                else
-                {
-                    echo '<table class="table table-bordered">
-                            <tr>
-                                <th>Title</th>
-                                <th>Artist</th>
-                                <th>Genres</th>
-                                <th>Year</th>
-                            </tr>';
-                    $arr = $selected_tracks;
-                    usort($arr, function ($a, $b) {return strcmp($a->title, $b->title);});
-                    foreach ($arr as $track) {
-                        echo '<tr>';
-                        echo '<td>'.$track->title.'</td>';
-                        echo '<td>'.$track->artist.'</td>';
-                        echo '<td>'.$track->get_genre_string().'</td>';
-                        echo '<td>'.$track->year.'</td>';
-                        echo '</tr>';
-                    }
-                    echo '</table>';
-                }
-            }
-        ?>
+        <!--Container for ajax search-->
     </div>
     </section>
     
