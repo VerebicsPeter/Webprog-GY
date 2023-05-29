@@ -45,7 +45,7 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
 </head>
 <body>
     <section class="container mt-2">
-    <article class="border border-secondary border-2 rounded-3 mb-2 p-4">
+    <article class="border border-secondary border-2 rounded-top mb-2 p-4">
         <h2><?=$playlist->name?></h2>
         <div style="margin-top: 10px;">
         <hr>
@@ -53,14 +53,16 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
         <hr>
         <h3>Tracks:</h3>
         <?php
-            echo '<table class="table table-bordered">
+            echo '<table class="table table-striped border">
+                    <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Artist</th>
-                        <th>Genres</th>
-                        <th>Length</th>
-                        <th>Year</th>
-                    </tr>';
+                        <th scope="col">Title</th>
+                        <th scope="col">Artist</th>
+                        <th scope="col">Genres</th>
+                        <th scope="col">Length</th>
+                        <th scope="col">Year</th>
+                    </tr>
+                    </thead>';
             foreach ($tracks as $track) {
                 echo '<tr>';
                 echo '<td>'.$track->title.'</td>';

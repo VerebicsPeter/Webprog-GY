@@ -128,7 +128,6 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
 
     <section id="playlists" class="container">
     <h2>Playlists</h2>
-    <!--TODO: proper filtering-->
     <?php foreach ($playlists as $playlist) {?>
         <article class="media border border-secondary border-2 rounded-3 w-75 mb-2 p-3">
         <h3><?=$playlist->name?></h3>

@@ -81,11 +81,13 @@ if (count($_POST) != 0) {
     <form action="" method="post">
         <label class="mb-2">Tracks:</label><br>
         <?php
-            echo '<table class="table table-bordered table-sm w-75">
+            echo '<table class="table table-striped table-sm border w-75">
+                    <thead>
                     <tr>
                         <th scope="col" class="col-6">Title</th>
                         <th scope="col" class="col-6">Artist</th>
-                    </tr>';
+                    </tr>
+                    </thead>';
             if (isset($playlist->tracks) && isset($_SESSION['tracks'])) {
                 foreach ($_SESSION['tracks'] as $track_id) {
                     $track = $track_repository->get_track_by_id($track_id);
@@ -106,13 +108,15 @@ if (count($_POST) != 0) {
     <section class="container mt-2">
     <h2>Tracks:</h2>
     <?php
-            echo '<table class="table table-bordered table-sm w-75">
+            echo '<table class="table table-striped table-sm border w-75">
+                    <thead>
                     <tr>
                         <th scope="col" class="col-6">Title</th>
                         <th scope="col" class="col-6">Artist</th>
                         <th scope="col" class="col-1">Add</th>
                         <th scope="col" class="col-1">Remove</th>
-                    </tr>';
+                    </tr>
+                    </thead>';
             $arr = $track_repository->all();
             usort($arr, function ($a, $b) {return strcmp($a->title, $b->title);});
             foreach ($arr as $track) {
@@ -139,7 +143,7 @@ if (count($_POST) != 0) {
     <hr>
     <section class="container">
         <a href="index.php" class="m-2">Home</a>
-        <a href=<?='showplaylist.php?id='.$playlist->_id?> class="m-2">Back</a>
+        <a href=<?='showplaylist.php?id='.$playlist->_id?> class="m-2">Playlist</a>
     </section>
     <hr>
 </body>

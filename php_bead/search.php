@@ -20,12 +20,14 @@
         else
         {
             echo '<table class="table table-bordered">
+                    <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Artist</th>
-                        <th>Genres</th>
-                        <th>Year</th>
-                    </tr>';
+                        <th scope="col" class="col-4">Title</th>
+                        <th scope="col" class="col-4">Artist</th>
+                        <th scope="col" class="col-3">Genres</th>
+                        <th scope="col" class="col-1">Year</th>
+                    </tr>
+                    </thead>';
             $arr = $selected_tracks;
             usort($arr, function ($a, $b) {return strcmp($a->title, $b->title);});
             foreach ($arr as $track) {

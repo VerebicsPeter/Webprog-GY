@@ -83,16 +83,18 @@ if (count($_POST) != 0) {
     <?php }?>
     <form action="" method="post">
         <label for="pname">Playlist name:</label><br>
-        <input id="pname" name="pname" type="text" placeholder="name your playlist" class="mb-3"
+        <input id="pname" name="pname" type="text" placeholder="name your playlist ..." class="mb-3"
         value="<?php if (isset($_POST['pname'])) echo $_POST['pname'] ?>"><br>
 
         <label>Playlist tracks:</label><br>
         <?php
-            echo '<table class="table table-bordered table-sm w-75">
+            echo '<table class="table table-striped table-sm border w-75">
+                    <thead>
                     <tr>
                         <th scope="col" class="col-6">Title</th>
                         <th scope="col" class="col-6">Artist</th>
-                    </tr>';
+                    </tr>
+                    </thead>';
             if (isset($_SESSION['tracks'])) {
                 foreach ($_SESSION['tracks'] as $trackid) {
                     $track = $track_repository->get_track_by_id($trackid);
@@ -116,12 +118,14 @@ if (count($_POST) != 0) {
     <section class="container mt-2">
     <h2>Tracks:</h2>
     <?php
-            echo '<table class="table table-bordered table-sm w-75">
+            echo '<table class="table table-striped table-sm border w-75">
+                    <thead>
                     <tr>
                         <th scope="col" class="col-6">Title</th>
                         <th scope="col" class="col-6">Artist</th>
                         <th scope="col" class="col-1">Add</th>
-                    </tr>';
+                    </tr>
+                    </thead>';
             $arr = $track_repository->all();
             usort($arr, function ($a, $b) {return strcmp($a->title, $b->title);});
             foreach ($arr as $track) {
