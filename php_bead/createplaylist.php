@@ -83,7 +83,7 @@ if (count($_POST) != 0) {
     <?php }?>
     <form action="" method="post">
         <label for="pname">Playlist name:</label><br>
-        <input id="pname" name="pname" type="text" placeholder="Name your playlist" 
+        <input id="pname" name="pname" type="text" placeholder="name your playlist" 
         value="<?php if (isset($_POST['pname'])) echo $_POST['pname'] ?>"><br>
 
         <label>Playlist tracks:</label><br>

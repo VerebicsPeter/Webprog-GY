@@ -44,22 +44,18 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listify - Home</title>
-    <!-- Ajax search -->
+    <!-- ajax search scrip-->
     <script>
-$(document).ready(function() {
-    $('#search').on('input', function() {
-        var searchValue = $(this).val();
-        $.ajax({
-            url: 'search.php',
-            type:'GET',
-            data: { search: searchValue },
-            success: function(response)
-            {
-                $('#tracks').html(response);
-            }
+        $(document).ready(function(){
+            $('#search').on('input', function() {
+                let searchValue = $(this).val();
+                $.ajax({
+                    url: 'search.php', type:'GET',
+                    data: { search: searchValue },
+                    success: function(response) {$('#tracks').html(response);}
+                });
+            });
         });
-    });
-});
 </script>
 </head>
 <body>
@@ -111,7 +107,7 @@ $(document).ready(function() {
         <h2>Search for a track</h2>
         <form action="" method="" novalidate>
             <div class="input-group w-75">
-                <input id="search" name="search" type="text" placeholder="Track's title ..." onkeyup="" class="form-control">
+                <input id="search" name="search" type="text" placeholder="track's title ..." onkeyup="" class="form-control">
             </div>
         </form>
         </div>
@@ -134,7 +130,7 @@ $(document).ready(function() {
     <h2>Playlists</h2>
     <!--TODO: proper filtering-->
     <?php foreach ($playlists as $playlist) {?>
-        <article class="media border border-primary rounded w-75 mb-1 p-3">
+        <article class="media border border-primary rounded w-75 mb-2 p-3">
         <h3><?=$playlist->name?></h3>
         <div class="mt-1">
             <b>Tracks:</b>

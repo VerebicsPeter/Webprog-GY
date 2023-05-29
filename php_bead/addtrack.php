@@ -73,10 +73,10 @@ if (count($_POST) != 0){
     <?php }?>
     <form action="" method="post">
         <label for="title">Track title:</label><br>
-        <input id="title" name="title" type="text" placeholder="Title" value="<?php if (isset($_POST['title'])) echo $_POST['title'] ?>"><br>
+        <input id="title" name="title" type="text" placeholder="title" value="<?php if (isset($_POST['title'])) echo $_POST['title'] ?>"><br>
 
         <label for="artist">Track artist:</label><br>
-        <input id="artist" name="artist" type="text" placeholder="Artist" value="<?php if (isset($_POST['artist'])) echo $_POST['artist'] ?>"><br>
+        <input id="artist" name="artist" type="text" placeholder="artist" value="<?php if (isset($_POST['artist'])) echo $_POST['artist'] ?>"><br>
         
         <label for="length">Track length:</label><br>
         <input id="length" name="length" type="text" placeholder="in seconds" value="<?php if (isset($_POST['length'])) echo $_POST['length'] ?>"><br>

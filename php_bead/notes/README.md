@@ -43,4 +43,4 @@ A listában tegyél `[X]` jelet minden olyan feladat elé, amelyet legalább ré
 ## Plusz feladatok (plusz 5 pont)
 
 [ ] Paraméteres kereső: a zeneszámokat az adatok alapján is meg lehet találni többféle szűrővel (pl. cím, szerző, hossz intervallum, év intervallum, műfajok) (3 pont)
-[ ] Paraméteres kereső: a keresés eredményei az oldal újratöltése nélkül AJAX / fetch technológiával frissülnek (2 pont)
+[x] Paraméteres kereső: a keresés eredményei az oldal újratöltése nélkül AJAX / fetch technológiával frissülnek (2 pont)
