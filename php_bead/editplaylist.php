@@ -79,7 +79,7 @@ if (count($_POST) != 0) {
     </ul>
     <?php }?>
     <form action="" method="post">
-        <label>Playlist tracks:</label><br>
+        <label class="mb-2">Tracks:</label><br>
         <?php
             echo '<table class="table table-bordered table-sm w-75">
                     <tr>

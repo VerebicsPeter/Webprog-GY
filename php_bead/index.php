@@ -76,8 +76,8 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
         <div class="col">
         <?php if ($auth->is_authenticated()) {?>
             <h2>Logged in as 
-            <?php echo $_SESSION["user"]; ?>
-            <span class="text-secondary"><?php echo $admin_string; ?></span>.
+            <?php echo $_SESSION["user"]; ?>.
+            <span class="text-secondary"><?php echo $admin_string; ?></span>
             </h2>
             <?php echo $email_string; ?>
             <br>
@@ -130,7 +130,7 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
     <h2>Playlists</h2>
     <!--TODO: proper filtering-->
     <?php foreach ($playlists as $playlist) {?>
-        <article class="media border border-primary border-2 rounded-3 w-75 mb-2 p-3">
+        <article class="media border border-secondary border-2 rounded-3 w-75 mb-2 p-3">
         <h3><?=$playlist->name?></h3>
         <div class="mt-1">
             <b>Tracks:</b>
