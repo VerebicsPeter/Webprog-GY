@@ -55,7 +55,7 @@ class Auth
         return null;
     }
 
-    public function is_admin($username)
+    private function is_admin_user($username)
     {
         $users = $this->userRepository->filter(function ($user) use ($username) {
             return ((array) $user)['username'] === $username;
@@ -64,6 +64,12 @@ class Auth
             $user = (array) array_values($users)[0];
             if (isset($user['is_admin'])) return $user['is_admin'] === 'true';
         }
+        return false;
+    }
+
+    public function is_admin()
+    {
+        if (isset($_SESSION['user'])) return $this->is_admin_user($_SESSION['user']);
         return false;
     }
 

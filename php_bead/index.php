@@ -11,14 +11,12 @@ $auth = new Auth();
 $plist_repository = new PlaylistRepository();
 $track_repository = new TrackRepository();
 
-$is_admin;
-$admin_string = '';
-$email;
-$email_string = '';
+$is_admin; $admin_string = '';
+$email; $email_string = '';
 
 if (isset($_SESSION['user']))
 {
-    $is_admin = $auth->is_admin($_SESSION['user']); // admin privliges
+    $is_admin = $auth->is_admin(); // admin privliges
     $admin_string = $is_admin ? '(admin)' : '(user)';
     $email = $auth->get_email_of($_SESSION['user']); // email string
     $email_string = isset($email)
@@ -80,7 +78,7 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
             <a class="mt-1" href="login.php">Login</a>
         <?php }?>
         </div>
-        <!--add new playlist col-->
+        <!--create new playlist column-->
         <div class="col">
         <?php if ($auth->is_authenticated()) {?>
             <h2>New playlist</h2>
@@ -94,17 +92,29 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
     <hr>
 
     <section id="search_track" class="container">
-    <h2>Search for a track</h2>
-    <form action="" method="get" novalidate>
-    <div class="input-group w-25">
-        <input id="search" name="search" type="text" placeholder="Track's title ..." onkeyup="" class="form-control">
-        <input type="submit" value="Search" class="btn btn-sm btn-primary">
+    <div class="row">
+        <div class="col">
+        <h2>Search for a track</h2>
+        <form action="" method="get" novalidate>
+            <div class="input-group w-50">
+                <input id="search" name="search" type="text" placeholder="Track's title ..." onkeyup="" class="form-control">
+                <input type="submit" value="Search" class="btn btn-sm btn-primary">
+            </div>
+        </form>
+        </div>
+        <!--TODO: use ajax to show results instead of this-->
+        <div class="col">
+        <?php if ($auth->is_authenticated() && $is_admin) {?>
+            <h2>New Track</h2>
+            Add a new track!<br>
+            <a class="mt-1" href="addtrack.php">New track</a>
+        <?php }?>
+        </div>
     </div>
-    </form>
-    <!--TODO: use ajax to show results instead of this-->
     <div id="tracks" class="container">
         <?php
             if (isset($selected_tracks)) {
+                if ($auth->is_admin()) echo '<hr>';
                 if (count($selected_tracks) === 0)
                 echo '<div class="alert alert-info">No results found.</div>';
                 else
