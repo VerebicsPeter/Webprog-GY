@@ -120,7 +120,7 @@ if (count($_POST) != 0) {
                         <th scope="col" class="col-1">Add</th>
                     </tr>';
             $arr = $track_repository->all();
-            $sorted = usort($arr, function ($a, $b) {return strcmp($a->title, $b->title);});
+            usort($arr, function ($a, $b) {return strcmp($a->title, $b->title);});
             foreach ($arr as $track) {
                 echo '<tr>';
                 echo '<td>'.$track->title.'</td>';

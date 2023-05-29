@@ -105,7 +105,8 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
             if (isset($selected_tracks)) {
                 if (count($selected_tracks) === 0)
                 echo '<div class="alert alert-info">No results found.</div>';
-                else {
+                else
+                {
                     echo '<table class="table table-bordered">
                             <tr>
                                 <th>Title</th>
@@ -113,7 +114,9 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
                                 <th>Genres</th>
                                 <th>Year</th>
                             </tr>';
-                    foreach ($selected_tracks as $track) {
+                    $arr = $selected_tracks;
+                    usort($arr, function ($a, $b) {return strcmp($a->title, $b->title);});
+                    foreach ($arr as $track) {
                         echo '<tr>';
                         echo '<td>'.$track->title.'</td>';
                         echo '<td>'.$track->artist.'</td>';
