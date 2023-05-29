@@ -41,7 +41,7 @@ $errors = [];
 if (count($_POST) != 0) {
     if (validate($_POST, $errors, $auth)) {
         $auth->register($_POST);
-        header('Location: login.php');
+        header('Location: signin.php');
         exit();
     }
 }
@@ -56,12 +56,12 @@ if (count($_POST) != 0) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listify - Registration</title>
+    <title>Listify - Sign-up</title>
 </head>
 
 <body>
     <section id="registration" class="container">
-    <h2>Registration</h2>
+    <h2>Sign up</h2>
     <?php if ($errors) {?>
     <ul>
         <?php foreach ($errors as $error) {?>
@@ -84,14 +84,14 @@ if (count($_POST) != 0) {
         <input id="email" name="email" type="email"
         value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>"><br>
 
-        <input class="mt-1 btn btn-sm btn-primary" type="submit" value="Register">
+        <input class="mt-1 btn btn-sm btn-primary" type="submit" value="Sign up">
     </form>
     </section>
     
     <hr>
 
     <section id="navlinks" class="container">
-        <a href="login.php" class="m-2">Login</a>
+        <a href="login.php" class="m-2">Log in</a>
     </section>
 
     <hr>

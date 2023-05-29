@@ -77,15 +77,15 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
         <?php if ($auth->is_authenticated()) {?>
             <h2>Logged in as 
             <?php echo $_SESSION["user"]; ?>
-            <?php echo $admin_string; ?>.
+            <span class="text-secondary"><?php echo $admin_string; ?></span>.
             </h2>
             <?php echo $email_string; ?>
             <br>
-        <a class="mt-1" href="logout.php">Logout</a>
+        <a class="mt-1" href="logout.php">Log out</a>
         <?php }?>
         <?php if (!$auth->is_authenticated()) {?>
-            <h2>Logged in as guest.</h2>
-            <a class="mt-1" href="login.php">Login</a>
+            <h2>Browsing as guest.</h2>
+            <a class="mt-1" href="login.php">Log in</a>
         <?php }?>
         </div>
         <!--create new playlist column-->

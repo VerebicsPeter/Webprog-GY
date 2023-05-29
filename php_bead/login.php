@@ -63,7 +63,7 @@ if (count($_POST) != 0) {
         <input id="username" name="username" type="text"><br>
         <label for="password">Password:</label><br>
         <input id="password" name="password" type="password"><br>
-        <input class="mt-1 btn btn-sm btn-primary" type="submit" value="Login">
+        <input class="mt-1 btn btn-sm btn-primary" type="submit" value="Log in">
     </form>
     </section>
 
@@ -71,7 +71,7 @@ if (count($_POST) != 0) {
 
     <section id="navlinks" class="container">
         <a href="index.php" class="m-2">Home</a>
-        <a href="register.php" class="m-2">Register</a>
+        <a href="signup.php" class="m-2">Sign up</a>
     </section>
     
     <hr>
