@@ -21,43 +21,33 @@ function is_empty($input, $key)
 
 function validate($input, &$errors)
 {
-    if (is_empty($input, "pname")){
-        $errors[] = "You must enter the playlist name!";
+    if (is_empty($input, "title") ||
+        is_empty($input, "artist")||
+        is_empty($input, "length")||
+        is_empty($input, "genres")||
+        is_empty($input, "year")){
+        $errors[] = "You must fill in all of the fields!";
     }
-    if (!isset($_SESSION['tracks']) || count($_SESSION['tracks']) === 0){
-        $errors[] = "No tracks added!";
+    else
+    if (!is_numeric($input['length'])){
+        $errors[] = "Length must be a numeric value!";
+    }
+    else
+    if (!is_numeric($input['year']) || !(strlen($_POST['year'])===4)){
+        $errors[] = "Year format is wrong!";
     }
 
     return !(bool) $errors;
 }
 
 $errors = [];
-if (count($_POST) != 0) {
-    if (!isset($_SESSION['tracks'])
-        && isset($_POST['tracks'])){
-        $_SESSION['tracks'] = $_POST['tracks'];
-    }
-    else
-    if (isset($_POST['tracks'])){
-        array_push($_SESSION['tracks'], ...$_POST['tracks']);
-    }
-    else
-    if (isset($_POST['clear'])){
-        $_SESSION['tracks'] = [];
-    }
-    else
-    if (isset($_POST["create"])){
-        if (validate($_POST, $errors)) {
-            $is_public = isset($_POST['is_public']) && $_POST['is_public'] === "on"
-            ? "true" : "false";
-            $plist_repository->add(new Playlist($_POST['pname'], $_SESSION['user'], $is_public, $_SESSION['tracks']));
-            unset($_SESSION['tracks']);
-            header('Location: index.php');
-        }
+if (count($_POST) != 0){
+    if (validate($_POST, $errors)){
+        $genres = explode(", ", $_POST['genres']);
+        $track_repository->add(new Track($_POST['title'], $_POST['artist'], $_POST['length'], $_POST['year'], $genres));
+        header('Location: index.php');
     }
 }
-
-echo 'hi admin';
 
 ?>
 
@@ -89,10 +79,10 @@ echo 'hi admin';
         <input id="artist" name="artist" type="text" placeholder="Artist" value="<?php if (isset($_POST['artist'])) echo $_POST['artist'] ?>"><br>
         
         <label for="length">Track length:</label><br>
-        <input id="length" name="length" type="text" placeholder="(s)" value="<?php if (isset($_POST['length'])) echo $_POST['length'] ?>"><br>
+        <input id="length" name="length" type="text" placeholder="in seconds" value="<?php if (isset($_POST['length'])) echo $_POST['length'] ?>"><br>
 
         <label for="year">Track year:</label><br>
-        <input id="year" name="year" type="year" placeholder="(YYYY)" value="<?php if (isset($_POST['year'])) echo $_POST['year'] ?>"><br>
+        <input id="year" name="year" type="year" placeholder="YYYY" value="<?php if (isset($_POST['year'])) echo $_POST['year'] ?>"><br>
         
         <label for="genres">Track genres:</label><br>
         <input id="genres" name="genres" type="genres" placeholder="pop, dance, ..." value="<?php if (isset($_POST['genres'])) echo $_POST['genres'] ?>"><br>
@@ -101,3 +91,8 @@ echo 'hi admin';
     </form>
     </section>
     <hr>
+    <section class="container">
+        <a href="index.php">Home</a>
+    </section>
+</body>
+</html>
