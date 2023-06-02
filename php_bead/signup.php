@@ -13,7 +13,7 @@ function validate($input, &$errors, $auth)
         $errors[] = "No username entered!";
     }
     if (is_empty($input, "password")) {
-        $errors[] = "No password entered!";
+        $errors[] = "Password was not entered!";
     }
     if (is_empty($input, "password_repeat")) {
         $errors[] = "Password was not repeated!";
@@ -61,39 +61,43 @@ if (count($_POST) != 0) {
 
 <body>
     <section id="registration" class="container">
-    <h2>Sign up</h2>
-    <?php if ($errors) {?>
-    <ul>
-        <?php foreach ($errors as $error) {?>
-        <li><?=$error?></li>
-        <?php }?>
-    </ul>
-    <?php }?>
-    <form action="" method="post" novalidate>
-        <label for="username"><span>*</span>Username:</label><br>
-        <input id="username" name="username" type="text"
-        value="<?php if (isset($_POST['username'])) echo $_POST['username']; ?>"><br>
+    <h2>Sign up</h2>    
+        <div class="row">
+            <div class="col-3">
+            <form action="" method="post" novalidate>
+                <label for="username"><span>*</span>Username:</label><br>
+                <input id="username" name="username" type="text"
+                value="<?= $_POST['username'] ?? "" ?>"><br>
 
-        <label for="password"><span>*</span>Password:</label><br>
-        <input id="password" name="password" type="password"><br>
+                <label for="password"><span>*</span>Password:</label><br>
+                <input id="password" name="password" type="password"><br>
 
-        <label for="password-repeat"><span>*</span>Repeat password:</label><br>
-        <input id="password-repeat" name="password_repeat" type="password"><br>
+                <label for="password-repeat"><span>*</span>Repeat password:</label><br>
+                <input id="password-repeat" name="password_repeat" type="password"><br>
 
-        <label for="email"><span>*</span>Email address:</label><br>
-        <input id="email" name="email" type="email"
-        value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>"><br>
+                <label for="email"><span>*</span>Email address:</label><br>
+                <input id="email" name="email" type="email"
+                value="<?= $_POST['email'] ?? "" ?>"><br>
 
-        <input class="mt-1 btn btn-sm btn-primary" type="submit" value="Sign up">
-    </form>
+                <input class="mt-2 btn btn-sm btn-primary" type="submit" value="Sign up">
+            </form>
+            </div>
+            <div class="col-9">
+            <?php if ($errors) {?>
+            <ul>
+                <?php foreach ($errors as $error) {?>
+                <li><?=$error?></li>
+                <?php }?>
+            </ul>
+            <?php }?>
+            </div>
+        </div>
     </section>
     
     <hr>
-
     <section id="navlinks" class="container">
         <a href="login.php" class="m-2">Log in</a>
     </section>
-
     <hr>
 </body>
 </html>

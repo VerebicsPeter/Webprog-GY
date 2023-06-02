@@ -51,20 +51,26 @@ if (count($_POST) != 0) {
 <body>
     <section id="login" class="container">
     <h2>Login</h2>
-    <?php if ($errors) {?>
-    <ul>
-        <?php foreach ($errors as $error) {?>
-        <li><?=$error?></li>
+    <div class="row">
+        <div class="col-3">
+        <form action="" method="post" novalidate>
+            <label for="username">Username:</label><br>
+            <input id="username" name="username" value="<?= $_POST['username'] ?? "" ?>" type="text"><br>
+            <label for="password">Password:</label><br>
+            <input id="password" name="password" type="password"><br>
+            <input class="mt-2 btn btn-sm btn-primary" type="submit" value="Log in">
+        </form>  
+        </div>
+        <div class="col-9">
+        <?php if ($errors) {?>
+        <ul>
+            <?php foreach ($errors as $error) {?>
+            <li><?=$error?></li>
+            <?php }?>
+        </ul>
         <?php }?>
-    </ul>
-    <?php }?>
-    <form action="" method="post" novalidate>
-        <label for="username">Username:</label><br>
-        <input id="username" name="username" type="text"><br>
-        <label for="password">Password:</label><br>
-        <input id="password" name="password" type="password"><br>
-        <input class="mt-1 btn btn-sm btn-primary" type="submit" value="Log in">
-    </form>
+        </div>
+    </div>
     </section>
 
     <hr>
