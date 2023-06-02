@@ -73,52 +73,48 @@ if (count($_POST) != 0) {
 </head>
 <body>
     <section class="container mt-2">
-    <h2>Create Playlist</h2>
-    <?php if ($errors) {?>
-    <ul>
-        <?php foreach ($errors as $error) {?>
-        <li><?=$error?></li>
-        <?php }?>
-    </ul>
-    <?php }?>
-    <form action="" method="post">
-        <label for="pname">Playlist name:</label><br>
-        <input id="pname" name="pname" type="text" placeholder="name your playlist ..." class="mb-3"
-        value="<?php if (isset($_POST['pname'])) echo $_POST['pname'] ?>"><br>
+    
+    <div class="row">
+        <div class="col">
+        <form action="" method="post" novalidate>
+            <h2>Create Playlist</h2>
 
-        <label>Playlist tracks:</label><br>
-        <?php
-            echo '<table class="table table-striped table-sm border w-75">
-                    <thead>
-                    <tr>
-                        <th scope="col" class="col-6">Title</th>
-                        <th scope="col" class="col-6">Artist</th>
-                    </tr>
-                    </thead>';
-            if (isset($_SESSION['tracks'])) {
-                foreach ($_SESSION['tracks'] as $trackid) {
-                    $track = $track_repository->get_track_by_id($trackid);
-                    echo '<tr>';
-                    echo '<td>'.$track->title.'</td>';
-                    echo '<td>'.$track->artist.'</td>';
-                    echo '</tr>';
+            <?php
+                echo '<table class="table table-striped table-sm border w-90">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="col-6">Title</th>
+                            <th scope="col" class="col-6">Artist</th>
+                        </tr>
+                        </thead>';
+                if (isset($_SESSION['tracks'])) {
+                    foreach ($_SESSION['tracks'] as $trackid) {
+                        $track = $track_repository->get_track_by_id($trackid);
+                        echo '<tr>';
+                        echo '<td>'.$track->title.'</td>';
+                        echo '<td>'.$track->artist.'</td>';
+                        echo '</tr>';
+                    }
                 }
-            }
-            echo '</table>';
-        ?>
+                echo '</table>';
+            ?>
 
-        <label for="is_public">Public:</label>
-        <input id="is_public" name="is_public" type="checkbox" class="mb-3"><br>
+            <label for="pname">Playlist name:</label><br>
+            <input id="pname" name="pname" type="text" class="mb-3"
+            value="<?php if (isset($_POST['pname'])) echo $_POST['pname'] ?>"><br>
 
-        <input class="mt-1 btn btn-sm btn-primary" type="submit" name="create" value="Create playlist">
-        <input class="mt-1 btn btn-sm btn-secondary" type="submit" name="clear" value="Clear tracks">
-    </form>
-    </section>
-    <hr>
-    <section class="container mt-2">
-    <h2>Tracks:</h2>
-    <?php
-            echo '<table class="table table-striped table-sm border w-75">
+            <label for="is_public">Public:</label>
+            <input id="is_public" name="is_public" type="checkbox" class="mb-3"><br>
+
+            <input class="mt-1 btn btn-sm btn-primary" type="submit" name="create" value="Create playlist">
+            <input class="mt-1 btn btn-sm btn-secondary" type="submit" name="clear" value="Clear tracks">
+        </form>
+        </div>
+        <div class="col">
+        <section>
+        <h2>Tracks</h2>
+        <?php
+            echo '<table class="table table-striped table-sm border w-90">
                     <thead>
                     <tr>
                         <th scope="col" class="col-6">Title</th>
@@ -142,6 +138,20 @@ if (count($_POST) != 0) {
             }
             echo '</table>';
         ?>
+        </section>
+        </div>
+    </div>
+
+    <?php if ($errors) {?>
+    <hr>
+    <ul>
+        <?php foreach ($errors as $error) {?>
+        <li><?=$error?></li>
+        <?php }?>
+    </ul>
+    <hr>
+    <?php }?>
+
     </section>
     <hr>
     <section class="container">

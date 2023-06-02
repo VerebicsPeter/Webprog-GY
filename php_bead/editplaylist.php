@@ -70,45 +70,38 @@ if (count($_POST) != 0) {
 </head>
 <body>
     <section class="container mt-2">
-    <h2>Edit Playlist</h2>
-    <?php if ($errors) {?>
-    <ul>
-        <?php foreach ($errors as $error) {?>
-        <li><?=$error?></li>
-        <?php }?>
-    </ul>
-    <?php }?>
-    <form action="" method="post">
-        <label class="mb-2">Tracks:</label><br>
-        <?php
-            echo '<table class="table table-striped table-sm border w-75">
-                    <thead>
-                    <tr>
-                        <th scope="col" class="col-6">Title</th>
-                        <th scope="col" class="col-6">Artist</th>
-                    </tr>
-                    </thead>';
-            if (isset($playlist->tracks) && isset($_SESSION['tracks'])) {
-                foreach ($_SESSION['tracks'] as $track_id) {
-                    $track = $track_repository->get_track_by_id($track_id);
-                    echo '<tr>';
-                    echo '<td>'.$track->title.'</td>';
-                    echo '<td>'.$track->artist.'</td>';
-                    echo '</tr>';
+    <div class="row">
+        <div class="col">
+        <h2>Edit Playlist</h2>
+        <form action="" method="post">
+            <?php
+                echo '<table class="table table-striped table-sm border w-90">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="col-6">Title</th>
+                            <th scope="col" class="col-6">Artist</th>
+                        </tr>
+                        </thead>';
+                if (isset($playlist->tracks) && isset($_SESSION['tracks'])) {
+                    foreach ($_SESSION['tracks'] as $track_id) {
+                        $track = $track_repository->get_track_by_id($track_id);
+                        echo '<tr>';
+                        echo '<td>'.$track->title.'</td>';
+                        echo '<td>'.$track->artist.'</td>';
+                        echo '</tr>';
+                    }
                 }
-            }
-            echo '</table>';
-        ?>
+                echo '</table>';
+            ?>
 
-        <input class="mt-1 btn btn-sm btn-primary" type="submit" name="edit" value="Edit playlist">
-        <input class="mt-1 btn btn-sm btn-secondary" type="submit" name="clear" value="Clear tracks">
-    </form>
-    </section>
-    <hr>
-    <section class="container mt-2">
-    <h2>Tracks:</h2>
-    <?php
-            echo '<table class="table table-striped table-sm border w-75">
+            <input class="mt-1 btn btn-sm btn-primary" type="submit" name="edit" value="Edit playlist">
+            <input class="mt-1 btn btn-sm btn-secondary" type="submit" name="clear" value="Clear tracks">
+        </form>
+        </div>
+        <div class="col">
+        <h2>Tracks</h2>
+        <?php
+            echo '<table class="table table-striped table-sm border w-90">
                     <thead>
                     <tr>
                         <th scope="col" class="col-6">Title</th>
@@ -139,7 +132,20 @@ if (count($_POST) != 0) {
             }
             echo '</table>';
         ?>
+        </div>
+    </div>
+
+    <?php if ($errors) {?>
+    <hr>
+    <ul>
+        <?php foreach ($errors as $error) {?>
+        <li><?=$error?></li>
+        <?php }?>
+    </ul>
+    <hr>
+    <?php }?>
     </section>
+    
     <hr>
     <section class="container">
         <a href="index.php" class="m-2">Home</a>

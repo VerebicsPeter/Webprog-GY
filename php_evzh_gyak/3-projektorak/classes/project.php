@@ -13,7 +13,6 @@ class Project {
         $this->project_hours = $project_hours;
         $this->employee_name = $employee_name;
     }
-
     public static function from_array(array $arr): Project
     {
         $instance = new Project();
@@ -23,7 +22,6 @@ class Project {
         $instance->employee_name = $arr['employee_name'] ?? null;
         return $instance;
     }
-
     public static function from_object(object $obj): Project
     {
         return self::from_array((array) $obj);

@@ -64,19 +64,13 @@ if (count($_POST) != 0){
 <body>
     <section class="container mt-2">
     <h2>Add Track</h2>
-    <?php if ($errors) {?>
-    <ul>
-        <?php foreach ($errors as $error) {?>
-        <li><?=$error?></li>
-        <?php }?>
-    </ul>
-    <?php }?>
+    
     <form action="" method="post">
         <label for="title">Track title:</label><br>
-        <input id="title" name="title" type="text" placeholder="title" value="<?php if (isset($_POST['title'])) echo $_POST['title'] ?>"><br>
+        <input id="title" name="title" type="text" value="<?php if (isset($_POST['title'])) echo $_POST['title'] ?>"><br>
 
         <label for="artist">Track artist:</label><br>
-        <input id="artist" name="artist" type="text" placeholder="artist" value="<?php if (isset($_POST['artist'])) echo $_POST['artist'] ?>"><br>
+        <input id="artist" name="artist" type="text" value="<?php if (isset($_POST['artist'])) echo $_POST['artist'] ?>"><br>
         
         <label for="length">Track length:</label><br>
         <input id="length" name="length" type="text" placeholder="in seconds" value="<?php if (isset($_POST['length'])) echo $_POST['length'] ?>"><br>
@@ -89,6 +83,16 @@ if (count($_POST) != 0){
 
         <input class="mt-1 btn btn-sm btn-primary" type="submit" name="addtrack" value="Add track">
     </form>
+
+    <?php if ($errors) {?>
+    <hr>
+    <ul>
+        <?php foreach ($errors as $error) {?>
+        <li><?=$error?></li>
+        <?php }?>
+    </ul>
+    <hr>
+    <?php }?>
     </section>
     <hr>
     <section class="container">
