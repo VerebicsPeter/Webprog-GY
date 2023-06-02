@@ -56,7 +56,7 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
                 });
             });
         });
-</script>
+    </script>
 </head>
 <body>
     <section id="title" class="container">
@@ -105,9 +105,9 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
     <div class="row">
         <div class="col">
         <h2>Search for a track</h2>
-        <form action="" novalidate autocomplete="off">
+        <form onsubmit="event.preventDefault();" autocomplete="off">
             <div class="input-group w-75">
-                <input id="search" type="text" placeholder="track's title ..." class="form-control">
+                <input id="search" type="text" placeholder="search for a track's title ..." class="form-control">
             </div>
         </form>
         </div>
@@ -120,7 +120,7 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
         </div>
     </div>
     <div id="tracks" class="container">
-        <!--Container for ajax search-->
+        <!--container for ajax search-->
     </div>
     </section>
     

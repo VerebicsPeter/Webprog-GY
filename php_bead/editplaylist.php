@@ -50,7 +50,7 @@ if (count($_POST) != 0) {
     if (isset($_POST['edit'])){
         if (validate($errors)){
             $plist_repository->update_tracks($playlist, $_SESSION['tracks']);
-            unset($_SESSION['tracks']); unset($_SESSION['just_started']);
+            unset($_SESSION['tracks']);
             header('Location: index.php');
         }
     }
@@ -63,17 +63,34 @@ if (count($_POST) != 0) {
     <!--Bootstrap-5-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listify - Edit Playlist</title>
+    <!-- ajax search scrip-->
+    <script>
+        $(document).ready(function(){
+            $('#search').on('input', function() {
+                let searchValue = $(this).val();
+                $.ajax({
+                    url: 'searchedit.php', type:'GET',
+                    data: { search: searchValue },
+                    success: function(response) {$('#tracks').html(response);}
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <section class="container mt-2">
     <div class="row">
         <div class="col">
-        <h2>Edit Playlist</h2>
-        <form action="" method="post">
+            <h2>Edit Playlist</h2>
+            <form action="" method="post" class="mb-4">
+                <input class="mt-2 btn btn-primary" type="submit" name="edit" value="Edit playlist">
+                <input class="mt-2 btn btn-secondary" type="submit" name="clear" value="Clear tracks">
+            </form>
             <?php
                 echo '<table class="table table-striped table-sm border w-90">
                         <thead>
@@ -93,46 +110,19 @@ if (count($_POST) != 0) {
                 }
                 echo '</table>';
             ?>
-
-            <input class="mt-1 btn btn-sm btn-primary" type="submit" name="edit" value="Edit playlist">
-            <input class="mt-1 btn btn-sm btn-secondary" type="submit" name="clear" value="Clear tracks">
-        </form>
         </div>
         <div class="col">
-        <h2>Tracks</h2>
-        <?php
-            echo '<table class="table table-striped table-sm border w-90">
-                    <thead>
-                    <tr>
-                        <th scope="col" class="col-6">Title</th>
-                        <th scope="col" class="col-6">Artist</th>
-                        <th scope="col" class="col-1">Add</th>
-                        <th scope="col" class="col-1">Remove</th>
-                    </tr>
-                    </thead>';
-            $arr = $track_repository->all();
-            usort($arr, function ($a, $b) {return strcmp($a->title, $b->title);});
-            foreach ($arr as $track) {
-                echo '<tr>';
-                echo '<td>'.$track->title.'</td>';
-                echo '<td>'.$track->artist.'</td>';
-                echo '<td>';
-                echo '<form method="POST" action="">';
-                echo '<input type="hidden" name="add[]" value="'.$track->_id.'">';
-                echo '<input type="submit" value="Add" class="btn btn-sm btn-primary">';
-                echo '</form>';
-                echo '</td>';
-                echo '<td>';
-                echo '<form method="POST" action="">';
-                echo '<input type="hidden" name="rem[]" value="'.$track->_id.'">';
-                echo '<input type="submit" value="Remove" class="btn btn-sm btn-secondary">';
-                echo '</form>';
-                echo '</td>';
-                echo '</tr>';
-            }
-            echo '</table>';
-        ?>
+            <h2>Tracks</h2>
+            <div class="input-group">
+                <form onsubmit="event.preventDefault();" autocomplete="off" class="mt-2">
+                    <input autocomplete="off" id="search" type="text" placeholder="search for a track's title ..." class="form-control">
+                </form>
+            </div>
+            <div id="tracks" class="mt-2">
+                <!--container for ajax search-->
+            </div>
         </div>
+    </div>
     </div>
 
     <?php if ($errors) {?>
