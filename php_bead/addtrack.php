@@ -81,7 +81,7 @@ if (count($_POST) != 0){
         <label for="genres">Track genres:</label><br>
         <input id="genres" name="genres" type="genres" placeholder="pop, dance, ..." value="<?php if (isset($_POST['genres'])) echo $_POST['genres'] ?>"><br>
 
-        <input class="mt-1 btn btn-sm btn-primary" type="submit" name="addtrack" value="Add track">
+        <input class="mt-2 btn btn-sm btn-primary" type="submit" name="addtrack" value="Add track">
     </form>
 
     <?php if ($errors) {?>

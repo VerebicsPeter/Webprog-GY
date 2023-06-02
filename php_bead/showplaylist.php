@@ -47,9 +47,15 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
     <section class="container mt-2">
     <article class="border border-secondary border-2 rounded-top mb-2 p-4">
         <h2><?=$playlist->name?></h2>
-        <div style="margin-top: 10px;">
+        <div class="mt-2">
         <hr>
-        <span>Length: <?=gmdate("H:i:s", $playlist_length)?></span><br>
+        <span>created by: <b><?=$playlist->creator?></b></span>
+        <?php echo ', '.count($tracks).' tracks , '; ?>
+        <?php if ($playlist_length / 360 > 0): ?>
+            <span><?= (intdiv($playlist_length, 60)).'m '.($playlist_length % 60).'s' ?></span><br>
+        <?php else : ?>
+            <span><?= (intdiv($playlist_length, 360)).'h '.(intdiv($playlist_length, 60)).'m '.($playlist_length % 60).'s' ?></span><br>
+        <?php endif; ?>
         <hr>
         <h3>Tracks:</h3>
         <?php
@@ -75,8 +81,6 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
             echo '</table>';
         ?>
         </div>
-        <hr>
-        <span>Created by: <b><?=$playlist->creator?></b></span><br>
         <hr>
         <?php 
             if ($editable) echo '<a href="editplaylist.php?id='.$playlist->_id.'">Edit Playlist</a>'
