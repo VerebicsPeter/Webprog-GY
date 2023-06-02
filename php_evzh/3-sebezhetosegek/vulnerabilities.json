@@ -1,16 +1,1 @@
-{
-    "647665f3469dc": {
-        "id": "647665f3469dc",
-        "shortdesc": "Gyeng\u00e9cske pajzs",
-        "danger": "3",
-        "longdesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "image": "src\/error2.png"
-    },
-    "647669381b1ac": {
-        "shortdesc": "Reaktor kimenet",
-        "danger": "5",
-        "longdesc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "image": "src\/error1.png",
-        "id": "647669381b1ac"
-    }
-}
+{"647665f3469dc":{"_id":"647665f3469dc","shortdesc":"Gyeng\u00e9cske pajzs","danger":"3","longdesc":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.","image":"src\/error2.png"},"647669381b1ac":{"shortdesc":"Reaktor kimenet","danger":"5","longdesc":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.","image":"src\/error1.png","_id":"647669381b1ac"},"647a101a1528b3.20667578":{"_id":"647a101a1528b3.20667578","shortdesc":"test1 *edited*","longdesc":"hahjsahjghfiohasdi","danger":"420","image":"https:\/\/encrypted-tbn0.gstatic.com\/images?q=tbn:ANd9GcREV6UUwQuTJ2h53tUSuzfXDQh2MdRzTaSCuPyGAAI&s"},"647a1396279582.07894868":{"_id":"647a1396279582.07894868","shortdesc":"test2","longdesc":"Ez egy teszt!!!","danger":"5","image":"https:\/\/img.freepik.com\/premium-photo\/british-shorthair-front-white-wall_191971-17751.jpg"},"647a1930827946.79524503":{"_id":"647a1930827946.79524503","shortdesc":"test3","longdesc":"ajsgdhasgjfas","danger":"218","image":"https:\/\/www.freeiconspng.com\/thumbs\/cat-png\/cat-png-17.png"}}

@@ -1,9 +1,9 @@
 # 3. feladat (Adattárolás) - Sebezhetőségek
 
-- [ ] a. Új sebezhetőség
-- [ ] b. Visszairányítás
-- [ ] c. Listázás
-- [ ] d. Részletező oldal
-- [ ] e. Szerkesztés
-- [ ] f. Visszairányítás
-- [ ] g. Alapértelmezett adatok
+- [x] a. Új sebezhetőség
+- [x] b. Visszairányítás
+- [x] c. Listázás
+- [x] d. Részletező oldal
+- [x] e. Szerkesztés
+- [x] f. Visszairányítás
+- [x] g. Alapértelmezett adatok

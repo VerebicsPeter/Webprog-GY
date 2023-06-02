@@ -1,5 +1,5 @@
 <?php
-
+/*
   interface IFileIO {
     function save();
     function load();
@@ -125,3 +125,4 @@
       file_put_contents($this->filepath, $file_content);
     }
   }
+*/

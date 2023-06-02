@@ -67,6 +67,23 @@ $imperial_plans = [
 // standard  🥈
 // backlog   🥉
 
+function priority(string $priority): int {
+    if ($priority === "important") return 1;
+    if ($priority === "standard") return 2;
+    return 3;
+}
+
+function probability($plan) : int {
+    if ($plan['engineer'] !== "Galen Erso")
+        return 100 - priority($plan['priority']) * (1 + abs(20 - $plan['time']));
+    return 0;
+}
+
+usort($imperial_plans, function ($plan_a, $plan_b) {
+    if (probability($plan_a) === probability($plan_b)) return 0;
+    return (probability($plan_a) < probability($plan_b)) ? 1 : -1;
+});
+
 ?>
 
 <!DOCTYPE html>
@@ -96,20 +113,34 @@ $imperial_plans = [
             </tr>
         </thead>
         <tbody>
-            <tr class="deathstar">
-                <td>Példa Projekt 1</td>
-                <td>Példa Péter</td>
-                <td></span><span class="time"></span><span class="time"></span></td>
-                <td>🥇</td>
-                <td>98</td>
-            </tr>
-            <tr>
-                <td>Példa Projekt 2</td>
-                <td>Példa Gergő</td>
-                <td><span class="time"></span><span class="time"></span><span class="time"></span><span class="time"></span></td>
-                <td>🥉</td>
-                <td>97</td>
-            </tr>
+
+            <?php foreach ($imperial_plans as $plan):?>
+                <tr <?php if ($plan['codename'] === $imperial_plans[0]['codename']) echo 'class="deathstar"'?>>
+                    <td><?=$plan['codename']?></td>
+                    <td><?=$plan['engineer']?></td>
+                    <td>
+                        <?php 
+                        $n = intdiv($plan['time'], 5);
+                        for ($i = 0; $i < $n; $i++) {?>
+                            <span class="time"></span>
+                        <?php } ?>
+                    </td>
+                    <td>
+                        <?php if ($plan['priority'] === "important"):?>
+                            🥇
+                        <?php endif; ?>
+                        <?php if ($plan['priority'] === "standard"):?>
+                            🥈
+                        <?php endif; ?>
+                        <?php if ($plan['priority'] === "backlog"):?>
+                            🥉
+                        <?php endif; ?>
+                    </td>
+                    <td>
+                        <?=probability($plan)?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
         </tbody>
     </table>
     

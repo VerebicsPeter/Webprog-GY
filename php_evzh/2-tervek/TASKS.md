@@ -1,8 +1,8 @@
 # 2. feladat (Kimenet) - Tervek
 
-- [ ] a. Táblázat
-- [ ] b. Prioritás
-- [ ] c. Idő span-ek
-- [ ] d. Valószínűség
-- [ ] e. Rendezés
-- [ ] f. Első sor stílusosztálya
+- [x] a. Táblázat
+- [x] b. Prioritás
+- [x] c. Idő span-ek
+- [x] d. Valószínűség
+- [x] e. Rendezés
+- [x] f. Első sor stílusosztálya

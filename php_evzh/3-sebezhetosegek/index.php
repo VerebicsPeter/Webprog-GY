@@ -1,3 +1,11 @@
+<?php
+
+include_once "classes/vulnerability.php";
+
+$vulnerability_store = new VulnerabilityStorage();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +23,7 @@
     </div>
 
     <h2>Sebezhetőség hozzáadása</h2>
-    <form>
+    <form action="A-add.php" method="post" novalidate>
         <label for="shortdesc">Rövid név</label>
         <input name="shortdesc" placeholder="Gyenge pajzs">
         
@@ -39,11 +47,12 @@
     </form>
 
     <h2>Sebezhetőségek</h2>
+    <?php foreach ($vulnerability_store->all() as $vulnerability) : ?>
     <ul>
         <li>
-            <a href="valami">Példa sebezhetőség</a>
+            <a href="<?='D-details.php?id='.$vulnerability->_id;?>"><?=$vulnerability->shortdesc?></a>
         </li>
     </ul>
-    
+    <?php endforeach; ?>
 </body>
 </html>
