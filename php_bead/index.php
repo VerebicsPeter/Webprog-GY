@@ -47,11 +47,12 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
     <!-- ajax search scrip-->
     <script>
         $(document).ready(function(){
-            $('#search').on('input', function() {
+            $('#search').on('keyup', function() {
                 let searchValue = $(this).val();
+                let categoryValue = $('#category').val();
                 $.ajax({
                     url: 'search.php', type:'GET',
-                    data: { search: searchValue },
+                    data: { search: searchValue, category: categoryValue },
                     success: function(response) {$('#tracks').html(response);}
                 });
             });
@@ -107,7 +108,12 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
         <h2>Search for a track</h2>
         <form onsubmit="event.preventDefault();" autocomplete="off">
             <div class="input-group w-75">
-                <input id="search" type="text" placeholder="search for a track's title ..." class="form-control">
+                <input id="search" type="text" placeholder="find a track by" class="form-control">
+                <select id="category" class="form-select">
+                    <option value="title">title</option>
+                    <option value="artist">artist</option>
+                    <option value="genres">genres</option>
+                </select>
             </div>
         </form>
         </div>

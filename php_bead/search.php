@@ -10,7 +10,14 @@
 
     $selected_tracks;
     if (count($_GET) != 0) {
-        $selected_tracks = $track_repository->get_tracks_by_title($_GET['search']);
+        $category = $_GET['category'] ?? "";
+        if ($category === "" || $category === "title")
+            $selected_tracks = $track_repository->get_tracks_by_title($_GET['search'] ?? "");
+        if ($category === "artist")
+            $selected_tracks = $track_repository->get_tracks_by_artist($_GET['search'] ?? "");
+        if ($category === "genres")
+            $selected_tracks = $track_repository->get_tracks_by_genres($_GET['search'] ?? "");
+        
     }
 
     if (isset($selected_tracks)) {

@@ -74,6 +74,19 @@ class TrackRepository
             return str_contains($track->title, $title);
         }));
     }
+    public function get_tracks_by_artist(string $artist = null) : array
+    {
+        return $this->convert($this->storage->filter(function ($track) use ($artist) {
+            return str_contains($track->artist, $artist);
+        }));
+    }
+    public function get_tracks_by_genres(string $genres = null) : array
+    {
+        return $this->convert($this->storage->filter(function ($track) use ($genres) {
+            $genres_string = implode(", ", $track->genres);
+            return str_contains($genres_string, $genres);
+        }));
+    }
 }
 
 ?>

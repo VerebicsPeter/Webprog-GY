@@ -76,9 +76,10 @@ if (count($_POST) != 0) {
         $(document).ready(function(){
             $('#search').on('input', function() {
                 let searchValue = $(this).val();
+                let categoryValue = $('#category').val();
                 $.ajax({
                     url: 'searchcreate.php', type:'GET',
-                    data: { search: searchValue },
+                    data: { search: searchValue, category: categoryValue },
                     success: function(response) {$('#tracks').html(response);}
                 });
             });
@@ -115,11 +116,11 @@ if (count($_POST) != 0) {
             ?>
 
             <div class="mt-4">
-            <label for="pname">Playlist name:</label><br>
+            <label for="pname" class="ms-2">Playlist name:</label><br>
             <input id="pname" name="pname" type="text" class="m-2"
             value="<?php if (isset($_POST['pname'])) echo $_POST['pname'] ?>"><br>
 
-            <label for="is_public">Public</label><input id="is_public" name="is_public" type="checkbox" class="m-2"><br>
+            <input id="is_public" name="is_public" type="checkbox" class="m-2"><label for="is_public">Public</label><br>
             </div>
         </form>
         </div>
@@ -127,7 +128,14 @@ if (count($_POST) != 0) {
             <h2>Tracks</h2>
             <div class="input-group">
                 <form onsubmit="event.preventDefault();" autocomplete="off">
-                    <input autocomplete="off" id="search" type="text" placeholder="search for a track's title ..." class="form-control">
+                <div class="input-group w-90">
+                    <input id="search" type="text" placeholder="find a track by" class="form-control">
+                    <select id="category" class="form-select">
+                        <option value="title">title</option>
+                        <option value="artist">artist</option>
+                        <option value="genres">genres</option>
+                    </select>
+                </div>
                 </form>
             </div>
             <div id="tracks" class="mt-2">

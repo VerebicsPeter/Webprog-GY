@@ -73,9 +73,10 @@ if (count($_POST) != 0) {
         $(document).ready(function(){
             $('#search').on('input', function() {
                 let searchValue = $(this).val();
+                let categoryValue = $('#category').val();
                 $.ajax({
                     url: 'searchedit.php', type:'GET',
-                    data: { search: searchValue },
+                    data: { search: searchValue, category: categoryValue },
                     success: function(response) {$('#tracks').html(response);}
                 });
             });
@@ -115,7 +116,14 @@ if (count($_POST) != 0) {
             <h2>Tracks</h2>
             <div class="input-group">
                 <form onsubmit="event.preventDefault();" autocomplete="off" class="mt-2">
-                    <input autocomplete="off" id="search" type="text" placeholder="search for a track's title ..." class="form-control">
+                    <div class="input-group w-75">
+                        <input id="search" type="text" placeholder="find a track by" class="form-control">
+                        <select id="category" class="form-select">
+                            <option value="title">title</option>
+                            <option value="artist">artist</option>
+                            <option value="genres">genres</option>
+                        </select>
+                    </div>
                 </form>
             </div>
             <div id="tracks" class="mt-2">
