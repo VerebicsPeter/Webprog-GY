@@ -116,7 +116,7 @@ if (count($_POST) != 0) {
             <h2>Tracks</h2>
             <div class="input-group">
                 <form onsubmit="event.preventDefault();" autocomplete="off" class="mt-2">
-                    <div class="input-group w-75">
+                    <div class="input-group w-90">
                         <input id="search" type="text" placeholder="find a track by" class="form-control">
                         <select id="category" class="form-select">
                             <option value="title">title</option>

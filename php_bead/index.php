@@ -108,7 +108,7 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
         <h2>Search for a track</h2>
         <form onsubmit="event.preventDefault();" autocomplete="off">
             <div class="input-group w-75">
-                <input id="search" type="text" placeholder="find a track by" class="form-control">
+                <input id="search" type="text" placeholder="find a track by" class="form-control w-75">
                 <select id="category" class="form-select">
                     <option value="title">title</option>
                     <option value="artist">artist</option>

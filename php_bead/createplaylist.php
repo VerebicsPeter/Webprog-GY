@@ -74,8 +74,8 @@ if (count($_POST) != 0) {
     <!-- ajax search scrip-->
     <script>
         $(document).ready(function(){
-            $('#search').on('input', function() {
-                let searchValue = $(this).val();
+            $('#search').on('keyup', function() {
+                let searchValue   = $(this).val();
                 let categoryValue = $('#category').val();
                 $.ajax({
                     url: 'searchcreate.php', type:'GET',

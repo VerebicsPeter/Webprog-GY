@@ -42,7 +42,7 @@
                 echo '<td>';
                 echo '<form method="POST" action="">';
                 echo '<input type="hidden" name="tracks[]" value="'.$track->_id.'">';
-                echo '<input type="submit" value="Add" class="btn btn-sm btn-primary">';
+                echo '<input type="submit" value="Add" class="btn btn-sm btn-primary addbtn">';
                 echo '</form>';
                 echo '</td>';
                 echo '</tr>';
