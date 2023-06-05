@@ -61,11 +61,21 @@ class TrackRepository
     {
         return $this->storage->insert($track);
     }
+    public function edit(string $id, Track $edited) {
+        $this->storage->update(
+            function ($track) use ($id) {return $track->_id === $id;},
+            function ($track) use ($edited) {
+                $track->year = $edited->year;
+                $track->title = $edited->title;
+                $track->artist = $edited->artist;
+                $track->genres = $edited->genres;
+                $track->length = $edited->length;
+            }
+        );
+    }
     public function get_track_by_id(string $id = null) : Track
     {
-        foreach ($this->all() as $track) {
-            if ($track->_id === $id) return $track;
-        }
+        if (isset($this->all()[$id])) return $this->all()[$id];
         return null;
     }
     public function get_tracks_by_title(string $title = null) : array

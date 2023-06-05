@@ -36,7 +36,7 @@ A listában tegyél `[X]` jelet minden olyan feladat elé, amelyet legalább ré
 [x] Saját listák: a létrehozott lista lehet publikus vagy rejtett is, és ez megfelelően működik a listázásnál (1 pont)
 [x] Admin funkció: be lehet jelentkezni az admin felhasználó adataival (0,5 pont)
 [x] Admin funkció: az admin (és CSAK az admin) létrehozhat új zeneszámokat (1 pont)
-[ ] Admin funkció: az admin (és CSAK az admin) módosíthat zeneszámokat (1 pont)
+[x] Admin funkció: az admin (és CSAK az admin) módosíthat zeneszámokat (1 pont)
 [ ] Admin funkció: az admin (és CSAK az admin) törölhet zeneszámokat (1 pont)
 [ ] **Késés: -0,5 pont / megkezdett nap!**
 

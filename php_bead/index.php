@@ -108,20 +108,37 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
         <h2>Search for a track</h2>
         <form onsubmit="event.preventDefault();" autocomplete="off">
             <div class="input-group w-75">
-                <input id="search" type="text" placeholder="find a track by" class="form-control w-75">
-                <select id="category" class="form-select">
-                    <option value="title">title</option>
-                    <option value="artist">artist</option>
-                    <option value="genres">genres</option>
-                </select>
+                <div class="grid">
+                    <div class="row">
+                        <div class="col-8">
+                            <input id="search" type="text" placeholder="find a track by" class="form-control">
+                        </div>
+                        <div class="col-4">
+                        <select id="category" class="form-select">
+                            <option value="title">title</option>
+                            <option value="artist">artist</option>
+                            <option value="genres">genres</option>
+                        </select>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
         </div>
         <div class="col">
         <?php if ($auth->is_authenticated() && $is_admin) {?>
-            <h2>New Track</h2>
-            Add a new track!<br>
-            <a class="mt-1" href="addtrack.php">New track</a>
+            <div class="row">
+                <div class="col-6">
+                <h2>New Track</h2>
+                Add a new track!<br>
+                <a class="mt-1" href="addtrack.php">New track</a>
+                </div>
+                <div class="col-6">
+                <h2>Edit Tracks</h2>
+                Edit existing tracks!<br>
+                <a class="mt-1" href="edittracks.php">Edit tracks</a>
+                </div>
+            </div>
         <?php }?>
         </div>
     </div>
