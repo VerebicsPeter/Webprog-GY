@@ -45,7 +45,7 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
 </head>
 <body>
     <section class="container mt-2">
-    <article class="border border-secondary border-2 rounded-top mb-2 p-4">
+    <article class="border border-secondary border-2 rounded-3 mb-2 p-4">
         <h2><?=$playlist->name?></h2>
         <div class="mt-2">
         <hr>
@@ -57,7 +57,7 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
             <span><?= (intdiv($playlist_length, 360)).'h '.(intdiv($playlist_length, 60)).'m '.($playlist_length % 60).'s' ?></span><br>
         <?php endif; ?>
         <hr>
-        <h3>Tracks:</h3>
+        <h3>Tracks</h3>
         <?php
             echo '<table class="table table-striped border">
                     <thead>

@@ -97,6 +97,15 @@ class TrackRepository
             return str_contains($genres_string, $genres);
         }));
     }
+
+    public function delete_track_by(string $id = null) {
+        $track = $this->all()[$id];
+        if (isset($track)) {
+            $this->storage->delete(
+                function ($t) use ($track) {return $t->_id===$track->_id;}
+            );
+        }
+    } 
 }
 
 ?>

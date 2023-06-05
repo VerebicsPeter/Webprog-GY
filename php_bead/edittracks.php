@@ -23,15 +23,15 @@ if (!($auth->is_authenticated() && $auth->is_admin())) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listify - Add Track</title>
+    <title>Listify - Edit Tracks</title>
 </head>
 <body>
     <section class="container mt-2">
-    <h2>Edit Tracks</h2>
+    <h2 class="mb-4">Edit tracks</h2>
     
     <?php foreach ($track_repository->all() as $track) {?>
         <div class="row border w-75">
-            <div class="col-6">
+            <div class="col-5">
                 <?=$track->title?>
             </div>
             <div class="col-5">
@@ -39,6 +39,9 @@ if (!($auth->is_authenticated() && $auth->is_admin())) {
             </div>
             <div class="col-1 text-end">
                 <a href="edittrack.php?id=<?=$track->_id?>">edit</a>
+            </div>
+            <div class="col-1 text-end">
+                <a href="removetrack.php?id=<?=$track->_id?>" onclick="return confirm('Are you sure you want to remove this track?');">remove</a>
             </div>
         </div>
     <?php }?>

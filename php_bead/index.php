@@ -106,7 +106,7 @@ if (isset($_SESSION['tracks'])) unset($_SESSION['tracks']); // unset if set
     <div class="row">
         <div class="col">
         <h2>Search for a track</h2>
-        <form onsubmit="event.preventDefault();" autocomplete="off">
+        <form onsubmit="event.preventDefault();" autocomplete="off" novalidate>
             <div class="input-group w-75">
                 <div class="grid">
                     <div class="row">

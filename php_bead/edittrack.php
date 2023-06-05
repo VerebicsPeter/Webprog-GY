@@ -73,11 +73,11 @@ if ($id != "")
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listify - Add Track</title>
+    <title>Listify - Edit Track</title>
 </head>
 <body>
     <section class="container mt-2">
-    <h2><small>Editing </small><i><?=$track->title.'</i><small> by </small><i>'.$track->artist?></i></h2>
+    <h2 class="mb-2">Edit track</h2>
     
     <form action="" method="post">
         <label for="title">Track title:</label><br>

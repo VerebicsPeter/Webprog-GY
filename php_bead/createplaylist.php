@@ -129,7 +129,7 @@ if (count($_POST) != 0) {
             <div class="input-group">
                 <form onsubmit="event.preventDefault();" autocomplete="off">
                 <div class="input-group w-90">
-                    <input id="search" type="text" placeholder="find a track by" class="form-control">
+                    <input id="search" type="text" placeholder="find a track by" class="form-control" novalidate>
                     <select id="category" class="form-select">
                         <option value="title">title</option>
                         <option value="artist">artist</option>

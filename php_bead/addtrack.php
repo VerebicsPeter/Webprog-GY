@@ -63,9 +63,9 @@ if (count($_POST) != 0){
 </head>
 <body>
     <section class="container mt-2">
-    <h2>Add Track</h2>
+    <h2>Add track</h2>
     
-    <form action="" method="post">
+    <form action="" method="post" novalidate>
         <label for="title">Track title:</label><br>
         <input id="title" name="title" type="text" value="<?php if (isset($_POST['title'])) echo $_POST['title'] ?>"><br>
 

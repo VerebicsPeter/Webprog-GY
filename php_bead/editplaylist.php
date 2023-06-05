@@ -71,7 +71,7 @@ if (count($_POST) != 0) {
     <!-- ajax search scrip-->
     <script>
         $(document).ready(function(){
-            $('#search').on('input', function() {
+            $('#search').on('keyup', function() {
                 let searchValue = $(this).val();
                 let categoryValue = $('#category').val();
                 $.ajax({
@@ -88,7 +88,7 @@ if (count($_POST) != 0) {
     <div class="row">
         <div class="col">
             <h2>Edit Playlist</h2>
-            <form action="" method="post" class="mb-4">
+            <form action="" method="post" class="mb-4" novalidate>
                 <input class="mt-2 btn btn-primary" type="submit" name="edit" value="Edit playlist">
                 <input class="mt-2 btn btn-secondary" type="submit" name="clear" value="Clear tracks">
             </form>
